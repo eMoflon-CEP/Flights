@@ -436,16 +436,6 @@ public class FlightsPackageImpl extends EPackageImpl implements FlightsPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getBookings_Persons() {
-		return (EReference) bookingsEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getBooking() {
 		return bookingEClass;
 	}
@@ -458,6 +448,16 @@ public class FlightsPackageImpl extends EPackageImpl implements FlightsPackage {
 	@Override
 	public EReference getBooking_Travels() {
 		return (EReference) bookingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getBooking_Persons() {
+		return (EReference) bookingEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -825,10 +825,10 @@ public class FlightsPackageImpl extends EPackageImpl implements FlightsPackage {
 
 		bookingsEClass = createEClass(BOOKINGS);
 		createEReference(bookingsEClass, BOOKINGS__BOOKINGS);
-		createEReference(bookingsEClass, BOOKINGS__PERSONS);
 
 		bookingEClass = createEClass(BOOKING);
 		createEReference(bookingEClass, BOOKING__TRAVELS);
+		createEReference(bookingEClass, BOOKING__PERSONS);
 
 		routesEClass = createEClass(ROUTES);
 		createEReference(routesEClass, ROUTES__ROUTES);
@@ -971,14 +971,14 @@ public class FlightsPackageImpl extends EPackageImpl implements FlightsPackage {
 		initEReference(getBookings_Bookings(), this.getBooking(), null, "bookings", null, 0, -1, Bookings.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBookings_Persons(), this.getPerson(), this.getPerson_Bookings(), "persons", null, 0, -1,
-				Bookings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bookingEClass, Booking.class, "Booking", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBooking_Travels(), this.getTravel(), null, "travels", null, 0, -1, Booking.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBooking_Persons(), this.getPerson(), this.getPerson_Bookings(), "persons", null, 0, -1,
+				Booking.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(routesEClass, Routes.class, "Routes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRoutes_Routes(), this.getRoute(), null, "routes", null, 0, -1, Routes.class, !IS_TRANSIENT,
@@ -1011,7 +1011,7 @@ public class FlightsPackageImpl extends EPackageImpl implements FlightsPackage {
 		initEClass(personEClass, Person.class, "Person", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPerson_TravelState(), this.getTravelState(), "travelState", null, 0, 1, Person.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPerson_Bookings(), this.getBookings(), this.getBookings_Persons(), "bookings", null, 0, -1,
+		initEReference(getPerson_Bookings(), this.getBooking(), this.getBooking_Persons(), "bookings", null, 0, -1,
 				Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

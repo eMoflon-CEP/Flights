@@ -49,16 +49,16 @@ public interface Person extends FlightObject {
 
 	/**
 	 * Returns the value of the '<em><b>Bookings</b></em>' reference list.
-	 * The list contents are of type {@link Flights.Bookings}.
-	 * It is bidirectional and its opposite is '{@link Flights.Bookings#getPersons <em>Persons</em>}'.
+	 * The list contents are of type {@link Flights.Booking}.
+	 * It is bidirectional and its opposite is '{@link Flights.Booking#getPersons <em>Persons</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Bookings</em>' reference list.
 	 * @see Flights.FlightsPackage#getPerson_Bookings()
-	 * @see Flights.Bookings#getPersons
+	 * @see Flights.Booking#getPersons
 	 * @model opposite="persons"
 	 * @generated
 	 */
-	EList<Bookings> getBookings();
+	EList<Booking> getBookings();
 
 } // Person
