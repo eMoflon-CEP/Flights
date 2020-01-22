@@ -2,7 +2,7 @@
  */
 package Flights.impl;
 
-import Flights.Bookings;
+import Flights.Booking;
 import Flights.FlightsPackage;
 import Flights.Person;
 import Flights.TravelState;
@@ -65,7 +65,7 @@ public class PersonImpl extends FlightObjectImpl implements Person {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Bookings> bookings;
+	protected EList<Booking> bookings;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -116,10 +116,10 @@ public class PersonImpl extends FlightObjectImpl implements Person {
 	 * @generated
 	 */
 	@Override
-	public EList<Bookings> getBookings() {
+	public EList<Booking> getBookings() {
 		if (bookings == null) {
-			bookings = new EObjectWithInverseResolvingEList.ManyInverse<Bookings>(Bookings.class, this,
-					FlightsPackage.PERSON__BOOKINGS, FlightsPackage.BOOKINGS__PERSONS);
+			bookings = new EObjectWithInverseResolvingEList.ManyInverse<Booking>(Booking.class, this,
+					FlightsPackage.PERSON__BOOKINGS, FlightsPackage.BOOKING__PERSONS);
 		}
 		return bookings;
 	}
@@ -183,7 +183,7 @@ public class PersonImpl extends FlightObjectImpl implements Person {
 			return;
 		case FlightsPackage.PERSON__BOOKINGS:
 			getBookings().clear();
-			getBookings().addAll((Collection<? extends Bookings>) newValue);
+			getBookings().addAll((Collection<? extends Booking>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
