@@ -10,7 +10,6 @@ import Flights.Route;
 import Flights.Travel;
 
 import java.util.Collection;
-import java.util.Date;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -52,7 +51,7 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Date DEPARTURE_EDEFAULT = null;
+	protected static final long DEPARTURE_EDEFAULT = 0L;
 
 	/**
 	 * The cached value of the '{@link #getDeparture() <em>Departure</em>}' attribute.
@@ -62,7 +61,7 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	 * @generated
 	 * @ordered
 	 */
-	protected Date departure = DEPARTURE_EDEFAULT;
+	protected long departure = DEPARTURE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getArrival() <em>Arrival</em>}' attribute.
@@ -72,7 +71,7 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Date ARRIVAL_EDEFAULT = null;
+	protected static final long ARRIVAL_EDEFAULT = 0L;
 
 	/**
 	 * The cached value of the '{@link #getArrival() <em>Arrival</em>}' attribute.
@@ -82,7 +81,7 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	 * @generated
 	 * @ordered
 	 */
-	protected Date arrival = ARRIVAL_EDEFAULT;
+	protected long arrival = ARRIVAL_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getTravels() <em>Travels</em>}' reference list.
@@ -159,7 +158,7 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	 * @generated
 	 */
 	@Override
-	public Date getDeparture() {
+	public long getDeparture() {
 		return departure;
 	}
 
@@ -169,8 +168,8 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	 * @generated
 	 */
 	@Override
-	public void setDeparture(Date newDeparture) {
-		Date oldDeparture = departure;
+	public void setDeparture(long newDeparture) {
+		long oldDeparture = departure;
 		departure = newDeparture;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FlightsPackage.FLIGHT__DEPARTURE, oldDeparture,
@@ -183,7 +182,7 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	 * @generated
 	 */
 	@Override
-	public Date getArrival() {
+	public long getArrival() {
 		return arrival;
 	}
 
@@ -193,8 +192,8 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	 * @generated
 	 */
 	@Override
-	public void setArrival(Date newArrival) {
-		Date oldArrival = arrival;
+	public void setArrival(long newArrival) {
+		long oldArrival = arrival;
 		arrival = newArrival;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FlightsPackage.FLIGHT__ARRIVAL, oldArrival, arrival));
@@ -583,10 +582,10 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 		case FlightsPackage.FLIGHT__DEPARTURE:
-			setDeparture((Date) newValue);
+			setDeparture((Long) newValue);
 			return;
 		case FlightsPackage.FLIGHT__ARRIVAL:
-			setArrival((Date) newValue);
+			setArrival((Long) newValue);
 			return;
 		case FlightsPackage.FLIGHT__TRAVELS:
 			getTravels().clear();
@@ -650,9 +649,9 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case FlightsPackage.FLIGHT__DEPARTURE:
-			return DEPARTURE_EDEFAULT == null ? departure != null : !DEPARTURE_EDEFAULT.equals(departure);
+			return departure != DEPARTURE_EDEFAULT;
 		case FlightsPackage.FLIGHT__ARRIVAL:
-			return ARRIVAL_EDEFAULT == null ? arrival != null : !ARRIVAL_EDEFAULT.equals(arrival);
+			return arrival != ARRIVAL_EDEFAULT;
 		case FlightsPackage.FLIGHT__TRAVELS:
 			return travels != null && !travels.isEmpty();
 		case FlightsPackage.FLIGHT__ROUTE:
