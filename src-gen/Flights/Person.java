@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link Flights.Person#getTravelState <em>Travel State</em>}</li>
- *   <li>{@link Flights.Person#getBookings <em>Bookings</em>}</li>
+ *   <li>{@link Flights.Person#getTravels <em>Travels</em>}</li>
  * </ul>
  *
  * @see Flights.FlightsPackage#getPerson()
@@ -48,17 +48,17 @@ public interface Person extends FlightObject {
 	void setTravelState(TravelState value);
 
 	/**
-	 * Returns the value of the '<em><b>Bookings</b></em>' reference list.
-	 * The list contents are of type {@link Flights.Booking}.
-	 * It is bidirectional and its opposite is '{@link Flights.Booking#getPersons <em>Persons</em>}'.
+	 * Returns the value of the '<em><b>Travels</b></em>' reference list.
+	 * The list contents are of type {@link Flights.Travel}.
+	 * It is bidirectional and its opposite is '{@link Flights.Travel#getPerson <em>Person</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Bookings</em>' reference list.
-	 * @see Flights.FlightsPackage#getPerson_Bookings()
-	 * @see Flights.Booking#getPersons
-	 * @model opposite="persons"
+	 * @return the value of the '<em>Travels</em>' reference list.
+	 * @see Flights.FlightsPackage#getPerson_Travels()
+	 * @see Flights.Travel#getPerson
+	 * @model opposite="person"
 	 * @generated
 	 */
-	EList<Booking> getBookings();
+	EList<Travel> getTravels();
 
 } // Person

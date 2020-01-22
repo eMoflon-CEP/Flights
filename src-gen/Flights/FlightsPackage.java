@@ -379,22 +379,13 @@ public interface FlightsPackage extends EPackage {
 	int BOOKING__TRAVELS = FLIGHT_OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Persons</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOKING__PERSONS = FLIGHT_OBJECT_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>Booking</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOOKING_FEATURE_COUNT = FLIGHT_OBJECT_FEATURE_COUNT + 2;
+	int BOOKING_FEATURE_COUNT = FLIGHT_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Booking</em>' class.
@@ -544,13 +535,22 @@ public interface FlightsPackage extends EPackage {
 	int TRAVEL__FLIGHTS = FLIGHT_OBJECT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Person</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRAVEL__PERSON = FLIGHT_OBJECT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Travel</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRAVEL_FEATURE_COUNT = FLIGHT_OBJECT_FEATURE_COUNT + 1;
+	int TRAVEL_FEATURE_COUNT = FLIGHT_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Travel</em>' class.
@@ -627,13 +627,13 @@ public interface FlightsPackage extends EPackage {
 	int PERSON__TRAVEL_STATE = FLIGHT_OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Bookings</b></em>' reference list.
+	 * The feature id for the '<em><b>Travels</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__BOOKINGS = FLIGHT_OBJECT_FEATURE_COUNT + 1;
+	int PERSON__TRAVELS = FLIGHT_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Person</em>' class.
@@ -1177,17 +1177,6 @@ public interface FlightsPackage extends EPackage {
 	EReference getBooking_Travels();
 
 	/**
-	 * Returns the meta object for the reference list '{@link Flights.Booking#getPersons <em>Persons</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Persons</em>'.
-	 * @see Flights.Booking#getPersons()
-	 * @see #getBooking()
-	 * @generated
-	 */
-	EReference getBooking_Persons();
-
-	/**
 	 * Returns the meta object for class '{@link Flights.Routes <em>Routes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1284,6 +1273,17 @@ public interface FlightsPackage extends EPackage {
 	EReference getTravel_Flights();
 
 	/**
+	 * Returns the meta object for the reference '{@link Flights.Travel#getPerson <em>Person</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Person</em>'.
+	 * @see Flights.Travel#getPerson()
+	 * @see #getTravel()
+	 * @generated
+	 */
+	EReference getTravel_Person();
+
+	/**
 	 * Returns the meta object for class '{@link Flights.Persons <em>Persons</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1326,15 +1326,15 @@ public interface FlightsPackage extends EPackage {
 	EAttribute getPerson_TravelState();
 
 	/**
-	 * Returns the meta object for the reference list '{@link Flights.Person#getBookings <em>Bookings</em>}'.
+	 * Returns the meta object for the reference list '{@link Flights.Person#getTravels <em>Travels</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Bookings</em>'.
-	 * @see Flights.Person#getBookings()
+	 * @return the meta object for the reference list '<em>Travels</em>'.
+	 * @see Flights.Person#getTravels()
 	 * @see #getPerson()
 	 * @generated
 	 */
-	EReference getPerson_Bookings();
+	EReference getPerson_Travels();
 
 	/**
 	 * Returns the meta object for class '{@link Flights.Airports <em>Airports</em>}'.
@@ -1737,14 +1737,6 @@ public interface FlightsPackage extends EPackage {
 		EReference BOOKING__TRAVELS = eINSTANCE.getBooking_Travels();
 
 		/**
-		 * The meta object literal for the '<em><b>Persons</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BOOKING__PERSONS = eINSTANCE.getBooking_Persons();
-
-		/**
 		 * The meta object literal for the '{@link Flights.impl.RoutesImpl <em>Routes</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1823,6 +1815,14 @@ public interface FlightsPackage extends EPackage {
 		EReference TRAVEL__FLIGHTS = eINSTANCE.getTravel_Flights();
 
 		/**
+		 * The meta object literal for the '<em><b>Person</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRAVEL__PERSON = eINSTANCE.getTravel_Person();
+
+		/**
 		 * The meta object literal for the '{@link Flights.impl.PersonsImpl <em>Persons</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1859,12 +1859,12 @@ public interface FlightsPackage extends EPackage {
 		EAttribute PERSON__TRAVEL_STATE = eINSTANCE.getPerson_TravelState();
 
 		/**
-		 * The meta object literal for the '<em><b>Bookings</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Travels</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PERSON__BOOKINGS = eINSTANCE.getPerson_Bookings();
+		EReference PERSON__TRAVELS = eINSTANCE.getPerson_Travels();
 
 		/**
 		 * The meta object literal for the '{@link Flights.impl.AirportsImpl <em>Airports</em>}' class.

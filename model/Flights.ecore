@@ -44,8 +44,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="Booking" eSuperTypes="#//FlightObject">
     <eStructuralFeatures xsi:type="ecore:EReference" name="travels" upperBound="-1"
         eType="#//Travel" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="persons" upperBound="-1"
-        eType="#//Person" eOpposite="#//Person/bookings"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Routes">
     <eStructuralFeatures xsi:type="ecore:EReference" name="routes" upperBound="-1"
@@ -63,6 +61,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Travel" eSuperTypes="#//FlightObject">
     <eStructuralFeatures xsi:type="ecore:EReference" name="flights" upperBound="-1"
         eType="#//Flight" eOpposite="#//Flight/travels"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="person" eType="#//Person"
+        eOpposite="#//Person/travels"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Persons">
     <eStructuralFeatures xsi:type="ecore:EReference" name="persons" upperBound="-1"
@@ -70,8 +70,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Person" eSuperTypes="#//FlightObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="travelState" eType="#//TravelState"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bookings" upperBound="-1"
-        eType="#//Booking" eOpposite="#//Booking/persons"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="travels" upperBound="-1"
+        eType="#//Travel" eOpposite="#//Travel/person"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Airports">
     <eStructuralFeatures xsi:type="ecore:EReference" name="airports" upperBound="-1"

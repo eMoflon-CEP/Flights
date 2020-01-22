@@ -2,9 +2,9 @@
  */
 package Flights.impl;
 
-import Flights.Booking;
 import Flights.FlightsPackage;
 import Flights.Person;
+import Flights.Travel;
 import Flights.TravelState;
 
 import java.util.Collection;
@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link Flights.impl.PersonImpl#getTravelState <em>Travel State</em>}</li>
- *   <li>{@link Flights.impl.PersonImpl#getBookings <em>Bookings</em>}</li>
+ *   <li>{@link Flights.impl.PersonImpl#getTravels <em>Travels</em>}</li>
  * </ul>
  *
  * @generated
@@ -58,14 +58,14 @@ public class PersonImpl extends FlightObjectImpl implements Person {
 	protected TravelState travelState = TRAVEL_STATE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getBookings() <em>Bookings</em>}' reference list.
+	 * The cached value of the '{@link #getTravels() <em>Travels</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getBookings()
+	 * @see #getTravels()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Booking> bookings;
+	protected EList<Travel> travels;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -116,12 +116,12 @@ public class PersonImpl extends FlightObjectImpl implements Person {
 	 * @generated
 	 */
 	@Override
-	public EList<Booking> getBookings() {
-		if (bookings == null) {
-			bookings = new EObjectWithInverseResolvingEList.ManyInverse<Booking>(Booking.class, this,
-					FlightsPackage.PERSON__BOOKINGS, FlightsPackage.BOOKING__PERSONS);
+	public EList<Travel> getTravels() {
+		if (travels == null) {
+			travels = new EObjectWithInverseResolvingEList<Travel>(Travel.class, this, FlightsPackage.PERSON__TRAVELS,
+					FlightsPackage.TRAVEL__PERSON);
 		}
-		return bookings;
+		return travels;
 	}
 
 	/**
@@ -133,8 +133,8 @@ public class PersonImpl extends FlightObjectImpl implements Person {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case FlightsPackage.PERSON__BOOKINGS:
-			return ((InternalEList<InternalEObject>) (InternalEList<?>) getBookings()).basicAdd(otherEnd, msgs);
+		case FlightsPackage.PERSON__TRAVELS:
+			return ((InternalEList<InternalEObject>) (InternalEList<?>) getTravels()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -147,8 +147,8 @@ public class PersonImpl extends FlightObjectImpl implements Person {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case FlightsPackage.PERSON__BOOKINGS:
-			return ((InternalEList<?>) getBookings()).basicRemove(otherEnd, msgs);
+		case FlightsPackage.PERSON__TRAVELS:
+			return ((InternalEList<?>) getTravels()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -163,8 +163,8 @@ public class PersonImpl extends FlightObjectImpl implements Person {
 		switch (featureID) {
 		case FlightsPackage.PERSON__TRAVEL_STATE:
 			return getTravelState();
-		case FlightsPackage.PERSON__BOOKINGS:
-			return getBookings();
+		case FlightsPackage.PERSON__TRAVELS:
+			return getTravels();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -181,9 +181,9 @@ public class PersonImpl extends FlightObjectImpl implements Person {
 		case FlightsPackage.PERSON__TRAVEL_STATE:
 			setTravelState((TravelState) newValue);
 			return;
-		case FlightsPackage.PERSON__BOOKINGS:
-			getBookings().clear();
-			getBookings().addAll((Collection<? extends Booking>) newValue);
+		case FlightsPackage.PERSON__TRAVELS:
+			getTravels().clear();
+			getTravels().addAll((Collection<? extends Travel>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -200,8 +200,8 @@ public class PersonImpl extends FlightObjectImpl implements Person {
 		case FlightsPackage.PERSON__TRAVEL_STATE:
 			setTravelState(TRAVEL_STATE_EDEFAULT);
 			return;
-		case FlightsPackage.PERSON__BOOKINGS:
-			getBookings().clear();
+		case FlightsPackage.PERSON__TRAVELS:
+			getTravels().clear();
 			return;
 		}
 		super.eUnset(featureID);
@@ -217,8 +217,8 @@ public class PersonImpl extends FlightObjectImpl implements Person {
 		switch (featureID) {
 		case FlightsPackage.PERSON__TRAVEL_STATE:
 			return travelState != TRAVEL_STATE_EDEFAULT;
-		case FlightsPackage.PERSON__BOOKINGS:
-			return bookings != null && !bookings.isEmpty();
+		case FlightsPackage.PERSON__TRAVELS:
+			return travels != null && !travels.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
