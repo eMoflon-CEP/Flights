@@ -43,7 +43,6 @@
     </genClasses>
     <genClasses ecoreClass="Flights.ecore#//Booking">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Flights.ecore#//Booking/travels"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Flights.ecore#//Booking/persons"/>
     </genClasses>
     <genClasses ecoreClass="Flights.ecore#//Routes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Flights.ecore#//Routes/routes"/>
@@ -56,13 +55,14 @@
     </genClasses>
     <genClasses ecoreClass="Flights.ecore#//Travel">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Flights.ecore#//Travel/flights"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Flights.ecore#//Travel/person"/>
     </genClasses>
     <genClasses ecoreClass="Flights.ecore#//Persons">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Flights.ecore#//Persons/persons"/>
     </genClasses>
     <genClasses ecoreClass="Flights.ecore#//Person">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Flights.ecore#//Person/travelState"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Flights.ecore#//Person/bookings"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Flights.ecore#//Person/travels"/>
     </genClasses>
     <genClasses ecoreClass="Flights.ecore#//Airports">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Flights.ecore#//Airports/airports"/>

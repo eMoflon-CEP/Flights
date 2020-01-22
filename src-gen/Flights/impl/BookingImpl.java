@@ -4,7 +4,6 @@ package Flights.impl;
 
 import Flights.Booking;
 import Flights.FlightsPackage;
-import Flights.Person;
 import Flights.Travel;
 
 import java.util.Collection;
@@ -17,7 +16,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -29,7 +27,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link Flights.impl.BookingImpl#getTravels <em>Travels</em>}</li>
- *   <li>{@link Flights.impl.BookingImpl#getPersons <em>Persons</em>}</li>
  * </ul>
  *
  * @generated
@@ -44,16 +41,6 @@ public class BookingImpl extends FlightObjectImpl implements Booking {
 	 * @ordered
 	 */
 	protected EList<Travel> travels;
-
-	/**
-	 * The cached value of the '{@link #getPersons() <em>Persons</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPersons()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Person> persons;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -93,41 +80,10 @@ public class BookingImpl extends FlightObjectImpl implements Booking {
 	 * @generated
 	 */
 	@Override
-	public EList<Person> getPersons() {
-		if (persons == null) {
-			persons = new EObjectWithInverseResolvingEList.ManyInverse<Person>(Person.class, this,
-					FlightsPackage.BOOKING__PERSONS, FlightsPackage.PERSON__BOOKINGS);
-		}
-		return persons;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-		case FlightsPackage.BOOKING__PERSONS:
-			return ((InternalEList<InternalEObject>) (InternalEList<?>) getPersons()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case FlightsPackage.BOOKING__TRAVELS:
 			return ((InternalEList<?>) getTravels()).basicRemove(otherEnd, msgs);
-		case FlightsPackage.BOOKING__PERSONS:
-			return ((InternalEList<?>) getPersons()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -142,8 +98,6 @@ public class BookingImpl extends FlightObjectImpl implements Booking {
 		switch (featureID) {
 		case FlightsPackage.BOOKING__TRAVELS:
 			return getTravels();
-		case FlightsPackage.BOOKING__PERSONS:
-			return getPersons();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -161,10 +115,6 @@ public class BookingImpl extends FlightObjectImpl implements Booking {
 			getTravels().clear();
 			getTravels().addAll((Collection<? extends Travel>) newValue);
 			return;
-		case FlightsPackage.BOOKING__PERSONS:
-			getPersons().clear();
-			getPersons().addAll((Collection<? extends Person>) newValue);
-			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -180,9 +130,6 @@ public class BookingImpl extends FlightObjectImpl implements Booking {
 		case FlightsPackage.BOOKING__TRAVELS:
 			getTravels().clear();
 			return;
-		case FlightsPackage.BOOKING__PERSONS:
-			getPersons().clear();
-			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -197,8 +144,6 @@ public class BookingImpl extends FlightObjectImpl implements Booking {
 		switch (featureID) {
 		case FlightsPackage.BOOKING__TRAVELS:
 			return travels != null && !travels.isEmpty();
-		case FlightsPackage.BOOKING__PERSONS:
-			return persons != null && !persons.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
