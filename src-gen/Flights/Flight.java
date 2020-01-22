@@ -2,7 +2,6 @@
  */
 package Flights;
 
-import java.util.Date;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -33,12 +32,12 @@ public interface Flight extends FlightObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Departure</em>' attribute.
-	 * @see #setDeparture(Date)
+	 * @see #setDeparture(long)
 	 * @see Flights.FlightsPackage#getFlight_Departure()
 	 * @model
 	 * @generated
 	 */
-	Date getDeparture();
+	long getDeparture();
 
 	/**
 	 * Sets the value of the '{@link Flights.Flight#getDeparture <em>Departure</em>}' attribute.
@@ -48,19 +47,19 @@ public interface Flight extends FlightObject {
 	 * @see #getDeparture()
 	 * @generated
 	 */
-	void setDeparture(Date value);
+	void setDeparture(long value);
 
 	/**
 	 * Returns the value of the '<em><b>Arrival</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Arrival</em>' attribute.
-	 * @see #setArrival(Date)
+	 * @see #setArrival(long)
 	 * @see Flights.FlightsPackage#getFlight_Arrival()
 	 * @model
 	 * @generated
 	 */
-	Date getArrival();
+	long getArrival();
 
 	/**
 	 * Sets the value of the '{@link Flights.Flight#getArrival <em>Arrival</em>}' attribute.
@@ -70,7 +69,7 @@ public interface Flight extends FlightObject {
 	 * @see #getArrival()
 	 * @generated
 	 */
-	void setArrival(Date value);
+	void setArrival(long value);
 
 	/**
 	 * Returns the value of the '<em><b>Travels</b></em>' reference list.

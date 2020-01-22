@@ -946,9 +946,9 @@ public class FlightsPackageImpl extends EPackageImpl implements FlightsPackage {
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(flightEClass, Flight.class, "Flight", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFlight_Departure(), ecorePackage.getEDate(), "departure", null, 0, 1, Flight.class,
+		initEAttribute(getFlight_Departure(), ecorePackage.getELong(), "departure", null, 0, 1, Flight.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFlight_Arrival(), ecorePackage.getEDate(), "arrival", null, 0, 1, Flight.class, !IS_TRANSIENT,
+		initEAttribute(getFlight_Arrival(), ecorePackage.getELong(), "arrival", null, 0, 1, Flight.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFlight_Travels(), this.getTravel(), this.getTravel_Flights(), "travels", null, 0, -1,
 				Flight.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
