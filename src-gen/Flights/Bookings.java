@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link Flights.Bookings#getBookings <em>Bookings</em>}</li>
- *   <li>{@link Flights.Bookings#getPersons <em>Persons</em>}</li>
  * </ul>
  *
  * @see Flights.FlightsPackage#getBookings()
@@ -35,19 +34,5 @@ public interface Bookings extends EObject {
 	 * @generated
 	 */
 	EList<Booking> getBookings();
-
-	/**
-	 * Returns the value of the '<em><b>Persons</b></em>' reference list.
-	 * The list contents are of type {@link Flights.Person}.
-	 * It is bidirectional and its opposite is '{@link Flights.Person#getBookings <em>Bookings</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Persons</em>' reference list.
-	 * @see Flights.FlightsPackage#getBookings_Persons()
-	 * @see Flights.Person#getBookings
-	 * @model opposite="bookings"
-	 * @generated
-	 */
-	EList<Person> getPersons();
 
 } // Bookings
