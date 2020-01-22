@@ -656,7 +656,7 @@
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_MZfxYCJUEeqIQrk4Se0TaA" name="departure : EDate" tooltipText="">
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_MZfxYCJUEeqIQrk4Se0TaA" name="departure : ELong" tooltipText="">
         <target xmi:type="ecore:EAttribute" href="Flights.ecore#//Flight/departure"/>
         <semanticElements xmi:type="ecore:EAttribute" href="Flights.ecore#//Flight/departure"/>
         <ownedStyle xmi:type="diagram:BundledImage" uid="_Oq5zUiJUEeqIQrk4Se0TaA" labelAlignment="LEFT">
@@ -664,7 +664,7 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_RZ0QoCJUEeqIQrk4Se0TaA" name="arrival : EDate" tooltipText="">
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_RZ0QoCJUEeqIQrk4Se0TaA" name="arrival : ELong" tooltipText="">
         <target xmi:type="ecore:EAttribute" href="Flights.ecore#//Flight/arrival"/>
         <semanticElements xmi:type="ecore:EAttribute" href="Flights.ecore#//Flight/arrival"/>
         <ownedStyle xmi:type="diagram:BundledImage" uid="_S5zctSJUEeqIQrk4Se0TaA" labelAlignment="LEFT">

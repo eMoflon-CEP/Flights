@@ -24,8 +24,8 @@
         eType="#//Flight" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Flight" eSuperTypes="#//FlightObject">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="departure" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arrival" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="departure" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arrival" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="travels" upperBound="-1"
         eType="#//Travel" eOpposite="#//Travel/flights"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" eType="#//Route"
