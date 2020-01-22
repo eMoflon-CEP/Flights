@@ -40,10 +40,10 @@
     </genClasses>
     <genClasses ecoreClass="Flights.ecore#//Bookings">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Flights.ecore#//Bookings/bookings"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Flights.ecore#//Bookings/persons"/>
     </genClasses>
     <genClasses ecoreClass="Flights.ecore#//Booking">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Flights.ecore#//Booking/travels"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Flights.ecore#//Booking/persons"/>
     </genClasses>
     <genClasses ecoreClass="Flights.ecore#//Routes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Flights.ecore#//Routes/routes"/>
