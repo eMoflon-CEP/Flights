@@ -1,4 +1,4 @@
-package org.emoflon.flight.model.util;
+package org.emoflon.flight.model.generator;
 
 import Flights.FlightModel;
 import Flights.FlightsFactory;
@@ -12,7 +12,7 @@ public class SimpleModelGenerator extends ModelGenerator{
 	
 	/**
 	 * @return a simple flight model containing, airports, routes, planes, flights, persons, and bookings,
-	 *  parsed from the 'simple.*' files found in '/Flights/src/org/emoflon/flight/model/examples'
+	 *  parsed from the 'simple.*' files found in '/Flights/src/org/emoflon/flight/model/definitions'
 	 */
 	public FlightModel generateSimpleModel() {
 		FlightModel model = factory.createFlightModel();

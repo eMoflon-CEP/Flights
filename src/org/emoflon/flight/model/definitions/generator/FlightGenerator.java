@@ -1,14 +1,16 @@
-package org.emoflon.flight.model.util;
+package org.emoflon.flight.model.definitions.generator;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import org.emoflon.flight.model.util.LongDateHelper;
+
 public class FlightGenerator {
 	/**
 	 * output path
 	 */
-	static String filePath = "src\\org\\emoflon\\flight\\model\\examples\\simple.flights";
+	static String filePath = "src\\org\\emoflon\\flight\\model\\definitions\\simple.flights";
 	/**
 	 * output header
 	 */

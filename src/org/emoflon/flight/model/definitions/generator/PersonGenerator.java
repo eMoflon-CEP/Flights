@@ -1,4 +1,4 @@
-package org.emoflon.flight.model.util;
+package org.emoflon.flight.model.definitions.generator;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -10,7 +10,7 @@ public class PersonGenerator {
 	/**
 	 * output path
 	 */
-	static String filePath = "src\\org\\emoflon\\flight\\model\\examples\\simple.persons";
+	static String filePath = "src\\org\\emoflon\\flight\\model\\definitions\\simple.persons";
 	/**
 	 * output header
 	 */
@@ -29,7 +29,7 @@ public class PersonGenerator {
 		PersonGenerator pg = new PersonGenerator();
 		List<String> generatedPersons = pg.generatePersons(amount);
 		try {
-			PrintWriter pw = new PrintWriter("src\\org\\emoflon\\flight\\model\\examples\\simple.persons");
+			PrintWriter pw = new PrintWriter(filePath);
 			for (String s: generatedPersons)
 				pw.append(s + "\n");
 			pw.flush();

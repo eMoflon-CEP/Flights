@@ -1,4 +1,4 @@
-package org.emoflon.flight.model.util;
+package org.emoflon.flight.model.definitions.generator;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -6,11 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.emoflon.flight.model.util.LongDateHelper;
+import org.emoflon.flight.model.util.ModelParser;
+
 public class BookingGenerator {
 	/**
 	 * output path
 	 */
-	static String filePath = "src\\org\\emoflon\\flight\\model\\examples\\simple.bookings";
+	static String filePath = "src\\org\\emoflon\\flight\\model\\definitions\\simple.bookings";
 	/**
 	 * output header
 	 */
@@ -70,7 +73,6 @@ public class BookingGenerator {
 			List<String> generatedBookings = bg.generateBookings(repeat);
 			pw.append(header);
 			for (String s : generatedBookings) {
-				System.out.println(s);
 				pw.append(s + "\n");
 			}
 			pw.flush();
