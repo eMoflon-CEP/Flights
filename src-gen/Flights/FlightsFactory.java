@@ -157,6 +157,15 @@ public interface FlightsFactory extends EFactory {
 	Gate createGate();
 
 	/**
+	 * Returns a new object of class '<em>Time Stamp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Time Stamp</em>'.
+	 * @generated
+	 */
+	TimeStamp createTimeStamp();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -194,6 +194,13 @@ public class FlightsSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case FlightsPackage.TIME_STAMP: {
+			TimeStamp timeStamp = (TimeStamp) theEObject;
+			T result = caseTimeStamp(timeStamp);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
@@ -436,6 +443,21 @@ public class FlightsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseGate(Gate object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Time Stamp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Time Stamp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTimeStamp(TimeStamp object) {
 		return null;
 	}
 

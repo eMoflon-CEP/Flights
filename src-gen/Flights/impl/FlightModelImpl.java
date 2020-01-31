@@ -11,6 +11,7 @@ import Flights.Persons;
 import Flights.Planes;
 import Flights.Routes;
 
+import Flights.TimeStamp;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -34,6 +35,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link Flights.impl.FlightModelImpl#getRoutes <em>Routes</em>}</li>
  *   <li>{@link Flights.impl.FlightModelImpl#getAirports <em>Airports</em>}</li>
  *   <li>{@link Flights.impl.FlightModelImpl#getPlanes <em>Planes</em>}</li>
+ *   <li>{@link Flights.impl.FlightModelImpl#getGlobalTime <em>Global Time</em>}</li>
  * </ul>
  *
  * @generated
@@ -98,6 +100,16 @@ public class FlightModelImpl extends MinimalEObjectImpl.Container implements Fli
 	 * @ordered
 	 */
 	protected Planes planes;
+
+	/**
+	 * The cached value of the '{@link #getGlobalTime() <em>Global Time</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGlobalTime()
+	 * @generated
+	 * @ordered
+	 */
+	protected TimeStamp globalTime;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -436,6 +448,58 @@ public class FlightModelImpl extends MinimalEObjectImpl.Container implements Fli
 	 * @generated
 	 */
 	@Override
+	public TimeStamp getGlobalTime() {
+		return globalTime;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetGlobalTime(TimeStamp newGlobalTime, NotificationChain msgs) {
+		TimeStamp oldGlobalTime = globalTime;
+		globalTime = newGlobalTime;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					FlightsPackage.FLIGHT_MODEL__GLOBAL_TIME, oldGlobalTime, newGlobalTime);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setGlobalTime(TimeStamp newGlobalTime) {
+		if (newGlobalTime != globalTime) {
+			NotificationChain msgs = null;
+			if (globalTime != null)
+				msgs = ((InternalEObject) globalTime).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - FlightsPackage.FLIGHT_MODEL__GLOBAL_TIME, null, msgs);
+			if (newGlobalTime != null)
+				msgs = ((InternalEObject) newGlobalTime).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - FlightsPackage.FLIGHT_MODEL__GLOBAL_TIME, null, msgs);
+			msgs = basicSetGlobalTime(newGlobalTime, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FlightsPackage.FLIGHT_MODEL__GLOBAL_TIME,
+					newGlobalTime, newGlobalTime));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case FlightsPackage.FLIGHT_MODEL__FLIGHTS:
@@ -450,6 +514,8 @@ public class FlightModelImpl extends MinimalEObjectImpl.Container implements Fli
 			return basicSetAirports(null, msgs);
 		case FlightsPackage.FLIGHT_MODEL__PLANES:
 			return basicSetPlanes(null, msgs);
+		case FlightsPackage.FLIGHT_MODEL__GLOBAL_TIME:
+			return basicSetGlobalTime(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -474,6 +540,8 @@ public class FlightModelImpl extends MinimalEObjectImpl.Container implements Fli
 			return getAirports();
 		case FlightsPackage.FLIGHT_MODEL__PLANES:
 			return getPlanes();
+		case FlightsPackage.FLIGHT_MODEL__GLOBAL_TIME:
+			return getGlobalTime();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -503,6 +571,9 @@ public class FlightModelImpl extends MinimalEObjectImpl.Container implements Fli
 			return;
 		case FlightsPackage.FLIGHT_MODEL__PLANES:
 			setPlanes((Planes) newValue);
+			return;
+		case FlightsPackage.FLIGHT_MODEL__GLOBAL_TIME:
+			setGlobalTime((TimeStamp) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -534,6 +605,9 @@ public class FlightModelImpl extends MinimalEObjectImpl.Container implements Fli
 		case FlightsPackage.FLIGHT_MODEL__PLANES:
 			setPlanes((Planes) null);
 			return;
+		case FlightsPackage.FLIGHT_MODEL__GLOBAL_TIME:
+			setGlobalTime((TimeStamp) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -558,6 +632,8 @@ public class FlightModelImpl extends MinimalEObjectImpl.Container implements Fli
 			return airports != null;
 		case FlightsPackage.FLIGHT_MODEL__PLANES:
 			return planes != null;
+		case FlightsPackage.FLIGHT_MODEL__GLOBAL_TIME:
+			return globalTime != null;
 		}
 		return super.eIsSet(featureID);
 	}

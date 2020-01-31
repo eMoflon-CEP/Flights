@@ -87,6 +87,8 @@ public class FlightsFactoryImpl extends EFactoryImpl implements FlightsFactory {
 			return createPlane();
 		case FlightsPackage.GATE:
 			return createGate();
+		case FlightsPackage.TIME_STAMP:
+			return createTimeStamp();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -285,6 +287,17 @@ public class FlightsFactoryImpl extends EFactoryImpl implements FlightsFactory {
 	public Gate createGate() {
 		GateImpl gate = new GateImpl();
 		return gate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public TimeStamp createTimeStamp() {
+		TimeStampImpl timeStamp = new TimeStampImpl();
+		return timeStamp;
 	}
 
 	/**

@@ -7,6 +7,7 @@ import Flights.FlightsPackage;
 import Flights.Gate;
 import Flights.Plane;
 import Flights.Route;
+import Flights.TimeStamp;
 import Flights.Travel;
 
 import java.util.Collection;
@@ -31,58 +32,18 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Flights.impl.FlightImpl#getDeparture <em>Departure</em>}</li>
- *   <li>{@link Flights.impl.FlightImpl#getArrival <em>Arrival</em>}</li>
  *   <li>{@link Flights.impl.FlightImpl#getTravels <em>Travels</em>}</li>
  *   <li>{@link Flights.impl.FlightImpl#getRoute <em>Route</em>}</li>
  *   <li>{@link Flights.impl.FlightImpl#getSrc <em>Src</em>}</li>
  *   <li>{@link Flights.impl.FlightImpl#getTrg <em>Trg</em>}</li>
  *   <li>{@link Flights.impl.FlightImpl#getPlane <em>Plane</em>}</li>
+ *   <li>{@link Flights.impl.FlightImpl#getDeparture <em>Departure</em>}</li>
+ *   <li>{@link Flights.impl.FlightImpl#getArrival <em>Arrival</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class FlightImpl extends FlightObjectImpl implements Flight {
-	/**
-	 * The default value of the '{@link #getDeparture() <em>Departure</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDeparture()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final long DEPARTURE_EDEFAULT = 0L;
-
-	/**
-	 * The cached value of the '{@link #getDeparture() <em>Departure</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDeparture()
-	 * @generated
-	 * @ordered
-	 */
-	protected long departure = DEPARTURE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getArrival() <em>Arrival</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getArrival()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final long ARRIVAL_EDEFAULT = 0L;
-
-	/**
-	 * The cached value of the '{@link #getArrival() <em>Arrival</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getArrival()
-	 * @generated
-	 * @ordered
-	 */
-	protected long arrival = ARRIVAL_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getTravels() <em>Travels</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -134,6 +95,26 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	protected Plane plane;
 
 	/**
+	 * The cached value of the '{@link #getDeparture() <em>Departure</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDeparture()
+	 * @generated
+	 * @ordered
+	 */
+	protected TimeStamp departure;
+
+	/**
+	 * The cached value of the '{@link #getArrival() <em>Arrival</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getArrival()
+	 * @generated
+	 * @ordered
+	 */
+	protected TimeStamp arrival;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -158,7 +139,7 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	 * @generated
 	 */
 	@Override
-	public long getDeparture() {
+	public TimeStamp getDeparture() {
 		return departure;
 	}
 
@@ -167,13 +148,18 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setDeparture(long newDeparture) {
-		long oldDeparture = departure;
+	public NotificationChain basicSetDeparture(TimeStamp newDeparture, NotificationChain msgs) {
+		TimeStamp oldDeparture = departure;
 		departure = newDeparture;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FlightsPackage.FLIGHT__DEPARTURE, oldDeparture,
-					departure));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					FlightsPackage.FLIGHT__DEPARTURE, oldDeparture, newDeparture);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -182,7 +168,30 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	 * @generated
 	 */
 	@Override
-	public long getArrival() {
+	public void setDeparture(TimeStamp newDeparture) {
+		if (newDeparture != departure) {
+			NotificationChain msgs = null;
+			if (departure != null)
+				msgs = ((InternalEObject) departure).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - FlightsPackage.FLIGHT__DEPARTURE, null, msgs);
+			if (newDeparture != null)
+				msgs = ((InternalEObject) newDeparture).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - FlightsPackage.FLIGHT__DEPARTURE, null, msgs);
+			msgs = basicSetDeparture(newDeparture, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FlightsPackage.FLIGHT__DEPARTURE, newDeparture,
+					newDeparture));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public TimeStamp getArrival() {
 		return arrival;
 	}
 
@@ -191,12 +200,41 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setArrival(long newArrival) {
-		long oldArrival = arrival;
+	public NotificationChain basicSetArrival(TimeStamp newArrival, NotificationChain msgs) {
+		TimeStamp oldArrival = arrival;
 		arrival = newArrival;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FlightsPackage.FLIGHT__ARRIVAL, oldArrival, arrival));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					FlightsPackage.FLIGHT__ARRIVAL, oldArrival, newArrival);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setArrival(TimeStamp newArrival) {
+		if (newArrival != arrival) {
+			NotificationChain msgs = null;
+			if (arrival != null)
+				msgs = ((InternalEObject) arrival).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - FlightsPackage.FLIGHT__ARRIVAL, null, msgs);
+			if (newArrival != null)
+				msgs = ((InternalEObject) newArrival).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - FlightsPackage.FLIGHT__ARRIVAL, null, msgs);
+			msgs = basicSetArrival(newArrival, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FlightsPackage.FLIGHT__ARRIVAL, newArrival,
+					newArrival));
 	}
 
 	/**
@@ -534,6 +572,10 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 			return basicSetTrg(null, msgs);
 		case FlightsPackage.FLIGHT__PLANE:
 			return basicSetPlane(null, msgs);
+		case FlightsPackage.FLIGHT__DEPARTURE:
+			return basicSetDeparture(null, msgs);
+		case FlightsPackage.FLIGHT__ARRIVAL:
+			return basicSetArrival(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -546,10 +588,6 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case FlightsPackage.FLIGHT__DEPARTURE:
-			return getDeparture();
-		case FlightsPackage.FLIGHT__ARRIVAL:
-			return getArrival();
 		case FlightsPackage.FLIGHT__TRAVELS:
 			return getTravels();
 		case FlightsPackage.FLIGHT__ROUTE:
@@ -568,6 +606,10 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 			if (resolve)
 				return getPlane();
 			return basicGetPlane();
+		case FlightsPackage.FLIGHT__DEPARTURE:
+			return getDeparture();
+		case FlightsPackage.FLIGHT__ARRIVAL:
+			return getArrival();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -581,12 +623,6 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case FlightsPackage.FLIGHT__DEPARTURE:
-			setDeparture((Long) newValue);
-			return;
-		case FlightsPackage.FLIGHT__ARRIVAL:
-			setArrival((Long) newValue);
-			return;
 		case FlightsPackage.FLIGHT__TRAVELS:
 			getTravels().clear();
 			getTravels().addAll((Collection<? extends Travel>) newValue);
@@ -603,6 +639,12 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 		case FlightsPackage.FLIGHT__PLANE:
 			setPlane((Plane) newValue);
 			return;
+		case FlightsPackage.FLIGHT__DEPARTURE:
+			setDeparture((TimeStamp) newValue);
+			return;
+		case FlightsPackage.FLIGHT__ARRIVAL:
+			setArrival((TimeStamp) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -615,12 +657,6 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case FlightsPackage.FLIGHT__DEPARTURE:
-			setDeparture(DEPARTURE_EDEFAULT);
-			return;
-		case FlightsPackage.FLIGHT__ARRIVAL:
-			setArrival(ARRIVAL_EDEFAULT);
-			return;
 		case FlightsPackage.FLIGHT__TRAVELS:
 			getTravels().clear();
 			return;
@@ -636,6 +672,12 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 		case FlightsPackage.FLIGHT__PLANE:
 			setPlane((Plane) null);
 			return;
+		case FlightsPackage.FLIGHT__DEPARTURE:
+			setDeparture((TimeStamp) null);
+			return;
+		case FlightsPackage.FLIGHT__ARRIVAL:
+			setArrival((TimeStamp) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -648,10 +690,6 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case FlightsPackage.FLIGHT__DEPARTURE:
-			return departure != DEPARTURE_EDEFAULT;
-		case FlightsPackage.FLIGHT__ARRIVAL:
-			return arrival != ARRIVAL_EDEFAULT;
 		case FlightsPackage.FLIGHT__TRAVELS:
 			return travels != null && !travels.isEmpty();
 		case FlightsPackage.FLIGHT__ROUTE:
@@ -662,27 +700,12 @@ public class FlightImpl extends FlightObjectImpl implements Flight {
 			return trg != null;
 		case FlightsPackage.FLIGHT__PLANE:
 			return plane != null;
+		case FlightsPackage.FLIGHT__DEPARTURE:
+			return departure != null;
+		case FlightsPackage.FLIGHT__ARRIVAL:
+			return arrival != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy())
-			return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (departure: ");
-		result.append(departure);
-		result.append(", arrival: ");
-		result.append(arrival);
-		result.append(')');
-		return result.toString();
 	}
 
 } //FlightImpl

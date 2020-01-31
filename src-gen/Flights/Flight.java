@@ -13,13 +13,13 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link Flights.Flight#getDeparture <em>Departure</em>}</li>
- *   <li>{@link Flights.Flight#getArrival <em>Arrival</em>}</li>
  *   <li>{@link Flights.Flight#getTravels <em>Travels</em>}</li>
  *   <li>{@link Flights.Flight#getRoute <em>Route</em>}</li>
  *   <li>{@link Flights.Flight#getSrc <em>Src</em>}</li>
  *   <li>{@link Flights.Flight#getTrg <em>Trg</em>}</li>
  *   <li>{@link Flights.Flight#getPlane <em>Plane</em>}</li>
+ *   <li>{@link Flights.Flight#getDeparture <em>Departure</em>}</li>
+ *   <li>{@link Flights.Flight#getArrival <em>Arrival</em>}</li>
  * </ul>
  *
  * @see Flights.FlightsPackage#getFlight()
@@ -28,48 +28,48 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Flight extends FlightObject {
 	/**
-	 * Returns the value of the '<em><b>Departure</b></em>' attribute.
+	 * Returns the value of the '<em><b>Departure</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Departure</em>' attribute.
-	 * @see #setDeparture(long)
+	 * @return the value of the '<em>Departure</em>' containment reference.
+	 * @see #setDeparture(TimeStamp)
 	 * @see Flights.FlightsPackage#getFlight_Departure()
-	 * @model
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	long getDeparture();
+	TimeStamp getDeparture();
 
 	/**
-	 * Sets the value of the '{@link Flights.Flight#getDeparture <em>Departure</em>}' attribute.
+	 * Sets the value of the '{@link Flights.Flight#getDeparture <em>Departure</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Departure</em>' attribute.
+	 * @param value the new value of the '<em>Departure</em>' containment reference.
 	 * @see #getDeparture()
 	 * @generated
 	 */
-	void setDeparture(long value);
+	void setDeparture(TimeStamp value);
 
 	/**
-	 * Returns the value of the '<em><b>Arrival</b></em>' attribute.
+	 * Returns the value of the '<em><b>Arrival</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Arrival</em>' attribute.
-	 * @see #setArrival(long)
+	 * @return the value of the '<em>Arrival</em>' containment reference.
+	 * @see #setArrival(TimeStamp)
 	 * @see Flights.FlightsPackage#getFlight_Arrival()
-	 * @model
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	long getArrival();
+	TimeStamp getArrival();
 
 	/**
-	 * Sets the value of the '{@link Flights.Flight#getArrival <em>Arrival</em>}' attribute.
+	 * Sets the value of the '{@link Flights.Flight#getArrival <em>Arrival</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Arrival</em>' attribute.
+	 * @param value the new value of the '<em>Arrival</em>' containment reference.
 	 * @see #getArrival()
 	 * @generated
 	 */
-	void setArrival(long value);
+	void setArrival(TimeStamp value);
 
 	/**
 	 * Returns the value of the '<em><b>Travels</b></em>' reference list.

@@ -19,6 +19,7 @@ import Flights.Plane;
 import Flights.Planes;
 import Flights.Route;
 import Flights.Routes;
+import Flights.TimeStamp;
 import Flights.Travel;
 import Flights.TravelState;
 
@@ -148,6 +149,13 @@ public class FlightsPackageImpl extends EPackageImpl implements FlightsPackage {
 	 * @generated
 	 */
 	private EClass gateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass timeStampEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -296,6 +304,16 @@ public class FlightsPackageImpl extends EPackageImpl implements FlightsPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getFlightModel_GlobalTime() {
+		return (EReference) flightModelEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getFlightObject() {
 		return flightObjectEClass;
 	}
@@ -346,57 +364,7 @@ public class FlightsPackageImpl extends EPackageImpl implements FlightsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getFlight_Departure() {
-		return (EAttribute) flightEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getFlight_Arrival() {
-		return (EAttribute) flightEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getFlight_Travels() {
-		return (EReference) flightEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getFlight_Route() {
-		return (EReference) flightEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getFlight_Src() {
-		return (EReference) flightEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getFlight_Trg() {
+	public EReference getFlight_Departure() {
 		return (EReference) flightEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -406,8 +374,58 @@ public class FlightsPackageImpl extends EPackageImpl implements FlightsPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getFlight_Plane() {
+	public EReference getFlight_Arrival() {
 		return (EReference) flightEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getFlight_Travels() {
+		return (EReference) flightEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getFlight_Route() {
+		return (EReference) flightEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getFlight_Src() {
+		return (EReference) flightEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getFlight_Trg() {
+		return (EReference) flightEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getFlight_Plane() {
+		return (EReference) flightEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -766,6 +784,26 @@ public class FlightsPackageImpl extends EPackageImpl implements FlightsPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getTimeStamp() {
+		return timeStampEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTimeStamp_Time() {
+		return (EAttribute) timeStampEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EEnum getTravelState() {
 		return travelStateEEnum;
 	}
@@ -807,6 +845,7 @@ public class FlightsPackageImpl extends EPackageImpl implements FlightsPackage {
 		createEReference(flightModelEClass, FLIGHT_MODEL__ROUTES);
 		createEReference(flightModelEClass, FLIGHT_MODEL__AIRPORTS);
 		createEReference(flightModelEClass, FLIGHT_MODEL__PLANES);
+		createEReference(flightModelEClass, FLIGHT_MODEL__GLOBAL_TIME);
 
 		flightObjectEClass = createEClass(FLIGHT_OBJECT);
 		createEAttribute(flightObjectEClass, FLIGHT_OBJECT__ID);
@@ -815,13 +854,13 @@ public class FlightsPackageImpl extends EPackageImpl implements FlightsPackage {
 		createEReference(flightContainerEClass, FLIGHT_CONTAINER__FLIGHTS);
 
 		flightEClass = createEClass(FLIGHT);
-		createEAttribute(flightEClass, FLIGHT__DEPARTURE);
-		createEAttribute(flightEClass, FLIGHT__ARRIVAL);
 		createEReference(flightEClass, FLIGHT__TRAVELS);
 		createEReference(flightEClass, FLIGHT__ROUTE);
 		createEReference(flightEClass, FLIGHT__SRC);
 		createEReference(flightEClass, FLIGHT__TRG);
 		createEReference(flightEClass, FLIGHT__PLANE);
+		createEReference(flightEClass, FLIGHT__DEPARTURE);
+		createEReference(flightEClass, FLIGHT__ARRIVAL);
 
 		bookingsEClass = createEClass(BOOKINGS);
 		createEReference(bookingsEClass, BOOKINGS__BOOKINGS);
@@ -869,6 +908,9 @@ public class FlightsPackageImpl extends EPackageImpl implements FlightsPackage {
 		createEAttribute(gateEClass, GATE__POSITION);
 		createEReference(gateEClass, GATE__OUTGOING_FLIGHTS);
 		createEReference(gateEClass, GATE__INCOMING_FLIGHTS);
+
+		timeStampEClass = createEClass(TIME_STAMP);
+		createEAttribute(timeStampEClass, TIME_STAMP__TIME);
 
 		// Create enums
 		travelStateEEnum = createEEnum(TRAVEL_STATE);
@@ -933,6 +975,9 @@ public class FlightsPackageImpl extends EPackageImpl implements FlightsPackage {
 		initEReference(getFlightModel_Planes(), this.getPlanes(), null, "planes", null, 1, 1, FlightModel.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFlightModel_GlobalTime(), this.getTimeStamp(), null, "globalTime", null, 1, 1,
+				FlightModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(flightObjectEClass, FlightObject.class, "FlightObject", IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -946,10 +991,6 @@ public class FlightsPackageImpl extends EPackageImpl implements FlightsPackage {
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(flightEClass, Flight.class, "Flight", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFlight_Departure(), ecorePackage.getELong(), "departure", null, 0, 1, Flight.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFlight_Arrival(), ecorePackage.getELong(), "arrival", null, 0, 1, Flight.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFlight_Travels(), this.getTravel(), this.getTravel_Flights(), "travels", null, 0, -1,
 				Flight.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -964,6 +1005,12 @@ public class FlightsPackageImpl extends EPackageImpl implements FlightsPackage {
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFlight_Plane(), this.getPlane(), this.getPlane_Flights(), "plane", null, 1, 1, Flight.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFlight_Departure(), this.getTimeStamp(), null, "departure", null, 1, 1, Flight.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFlight_Arrival(), this.getTimeStamp(), null, "arrival", null, 1, 1, Flight.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bookingsEClass, Bookings.class, "Bookings", !IS_ABSTRACT, !IS_INTERFACE,
@@ -1055,6 +1102,11 @@ public class FlightsPackageImpl extends EPackageImpl implements FlightsPackage {
 		initEReference(getGate_IncomingFlights(), this.getFlight(), this.getFlight_Trg(), "incomingFlights", null, 0,
 				-1, Gate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(timeStampEClass, TimeStamp.class, "TimeStamp", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTimeStamp_Time(), ecorePackage.getELong(), "time", null, 1, 1, TimeStamp.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(travelStateEEnum, TravelState.class, "TravelState");

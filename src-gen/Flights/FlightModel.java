@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link Flights.FlightModel#getRoutes <em>Routes</em>}</li>
  *   <li>{@link Flights.FlightModel#getAirports <em>Airports</em>}</li>
  *   <li>{@link Flights.FlightModel#getPlanes <em>Planes</em>}</li>
+ *   <li>{@link Flights.FlightModel#getGlobalTime <em>Global Time</em>}</li>
  * </ul>
  *
  * @see Flights.FlightsPackage#getFlightModel()
@@ -157,5 +158,27 @@ public interface FlightModel extends EObject {
 	 * @generated
 	 */
 	void setPlanes(Planes value);
+
+	/**
+	 * Returns the value of the '<em><b>Global Time</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Global Time</em>' containment reference.
+	 * @see #setGlobalTime(TimeStamp)
+	 * @see Flights.FlightsPackage#getFlightModel_GlobalTime()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	TimeStamp getGlobalTime();
+
+	/**
+	 * Sets the value of the '{@link Flights.FlightModel#getGlobalTime <em>Global Time</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Global Time</em>' containment reference.
+	 * @see #getGlobalTime()
+	 * @generated
+	 */
+	void setGlobalTime(TimeStamp value);
 
 } // FlightModel

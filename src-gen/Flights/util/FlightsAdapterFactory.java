@@ -147,6 +147,11 @@ public class FlightsAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseTimeStamp(TimeStamp object) {
+			return createTimeStampAdapter();
+		}
+
+		@Override
 		public Adapter defaultCase(EObject object) {
 			return createEObjectAdapter();
 		}
@@ -386,6 +391,20 @@ public class FlightsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createGateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link Flights.TimeStamp <em>Time Stamp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see Flights.TimeStamp
+	 * @generated
+	 */
+	public Adapter createTimeStampAdapter() {
 		return null;
 	}
 

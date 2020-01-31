@@ -122,13 +122,22 @@ public interface FlightsPackage extends EPackage {
 	int FLIGHT_MODEL__PLANES = 5;
 
 	/**
+	 * The feature id for the '<em><b>Global Time</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLIGHT_MODEL__GLOBAL_TIME = 6;
+
+	/**
 	 * The number of structural features of the '<em>Flight Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FLIGHT_MODEL_FEATURE_COUNT = 6;
+	int FLIGHT_MODEL_FEATURE_COUNT = 7;
 
 	/**
 	 * The number of operations of the '<em>Flight Model</em>' class.
@@ -233,31 +242,13 @@ public interface FlightsPackage extends EPackage {
 	int FLIGHT__ID = FLIGHT_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Departure</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLIGHT__DEPARTURE = FLIGHT_OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Arrival</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLIGHT__ARRIVAL = FLIGHT_OBJECT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Travels</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FLIGHT__TRAVELS = FLIGHT_OBJECT_FEATURE_COUNT + 2;
+	int FLIGHT__TRAVELS = FLIGHT_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Route</b></em>' reference.
@@ -266,7 +257,7 @@ public interface FlightsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLIGHT__ROUTE = FLIGHT_OBJECT_FEATURE_COUNT + 3;
+	int FLIGHT__ROUTE = FLIGHT_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Src</b></em>' reference.
@@ -275,7 +266,7 @@ public interface FlightsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLIGHT__SRC = FLIGHT_OBJECT_FEATURE_COUNT + 4;
+	int FLIGHT__SRC = FLIGHT_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Trg</b></em>' reference.
@@ -284,7 +275,7 @@ public interface FlightsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLIGHT__TRG = FLIGHT_OBJECT_FEATURE_COUNT + 5;
+	int FLIGHT__TRG = FLIGHT_OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Plane</b></em>' reference.
@@ -293,7 +284,25 @@ public interface FlightsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FLIGHT__PLANE = FLIGHT_OBJECT_FEATURE_COUNT + 6;
+	int FLIGHT__PLANE = FLIGHT_OBJECT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Departure</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLIGHT__DEPARTURE = FLIGHT_OBJECT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Arrival</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLIGHT__ARRIVAL = FLIGHT_OBJECT_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Flight</em>' class.
@@ -920,6 +929,43 @@ public interface FlightsPackage extends EPackage {
 	int GATE_OPERATION_COUNT = FLIGHT_OBJECT_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link Flights.impl.TimeStampImpl <em>Time Stamp</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see Flights.impl.TimeStampImpl
+	 * @see Flights.impl.FlightsPackageImpl#getTimeStamp()
+	 * @generated
+	 */
+	int TIME_STAMP = 16;
+
+	/**
+	 * The feature id for the '<em><b>Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_STAMP__TIME = 0;
+
+	/**
+	 * The number of structural features of the '<em>Time Stamp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_STAMP_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Time Stamp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_STAMP_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link Flights.TravelState <em>Travel State</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -927,7 +973,7 @@ public interface FlightsPackage extends EPackage {
 	 * @see Flights.impl.FlightsPackageImpl#getTravelState()
 	 * @generated
 	 */
-	int TRAVEL_STATE = 16;
+	int TRAVEL_STATE = 17;
 
 	/**
 	 * Returns the meta object for class '{@link Flights.FlightModel <em>Flight Model</em>}'.
@@ -1006,6 +1052,17 @@ public interface FlightsPackage extends EPackage {
 	EReference getFlightModel_Planes();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link Flights.FlightModel#getGlobalTime <em>Global Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Global Time</em>'.
+	 * @see Flights.FlightModel#getGlobalTime()
+	 * @see #getFlightModel()
+	 * @generated
+	 */
+	EReference getFlightModel_GlobalTime();
+
+	/**
 	 * Returns the meta object for class '{@link Flights.FlightObject <em>Flight Object</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1058,26 +1115,26 @@ public interface FlightsPackage extends EPackage {
 	EClass getFlight();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Flights.Flight#getDeparture <em>Departure</em>}'.
+	 * Returns the meta object for the containment reference '{@link Flights.Flight#getDeparture <em>Departure</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Departure</em>'.
+	 * @return the meta object for the containment reference '<em>Departure</em>'.
 	 * @see Flights.Flight#getDeparture()
 	 * @see #getFlight()
 	 * @generated
 	 */
-	EAttribute getFlight_Departure();
+	EReference getFlight_Departure();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Flights.Flight#getArrival <em>Arrival</em>}'.
+	 * Returns the meta object for the containment reference '{@link Flights.Flight#getArrival <em>Arrival</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Arrival</em>'.
+	 * @return the meta object for the containment reference '<em>Arrival</em>'.
 	 * @see Flights.Flight#getArrival()
 	 * @see #getFlight()
 	 * @generated
 	 */
-	EAttribute getFlight_Arrival();
+	EReference getFlight_Arrival();
 
 	/**
 	 * Returns the meta object for the reference list '{@link Flights.Flight#getTravels <em>Travels</em>}'.
@@ -1508,6 +1565,27 @@ public interface FlightsPackage extends EPackage {
 	EReference getGate_IncomingFlights();
 
 	/**
+	 * Returns the meta object for class '{@link Flights.TimeStamp <em>Time Stamp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Time Stamp</em>'.
+	 * @see Flights.TimeStamp
+	 * @generated
+	 */
+	EClass getTimeStamp();
+
+	/**
+	 * Returns the meta object for the attribute '{@link Flights.TimeStamp#getTime <em>Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Time</em>'.
+	 * @see Flights.TimeStamp#getTime()
+	 * @see #getTimeStamp()
+	 * @generated
+	 */
+	EAttribute getTimeStamp_Time();
+
+	/**
 	 * Returns the meta object for enum '{@link Flights.TravelState <em>Travel State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1599,6 +1677,14 @@ public interface FlightsPackage extends EPackage {
 		EReference FLIGHT_MODEL__PLANES = eINSTANCE.getFlightModel_Planes();
 
 		/**
+		 * The meta object literal for the '<em><b>Global Time</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FLIGHT_MODEL__GLOBAL_TIME = eINSTANCE.getFlightModel_GlobalTime();
+
+		/**
 		 * The meta object literal for the '{@link Flights.impl.FlightObjectImpl <em>Flight Object</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1645,20 +1731,20 @@ public interface FlightsPackage extends EPackage {
 		EClass FLIGHT = eINSTANCE.getFlight();
 
 		/**
-		 * The meta object literal for the '<em><b>Departure</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Departure</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute FLIGHT__DEPARTURE = eINSTANCE.getFlight_Departure();
+		EReference FLIGHT__DEPARTURE = eINSTANCE.getFlight_Departure();
 
 		/**
-		 * The meta object literal for the '<em><b>Arrival</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Arrival</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute FLIGHT__ARRIVAL = eINSTANCE.getFlight_Arrival();
+		EReference FLIGHT__ARRIVAL = eINSTANCE.getFlight_Arrival();
 
 		/**
 		 * The meta object literal for the '<em><b>Travels</b></em>' reference list feature.
@@ -2003,6 +2089,24 @@ public interface FlightsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference GATE__INCOMING_FLIGHTS = eINSTANCE.getGate_IncomingFlights();
+
+		/**
+		 * The meta object literal for the '{@link Flights.impl.TimeStampImpl <em>Time Stamp</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see Flights.impl.TimeStampImpl
+		 * @see Flights.impl.FlightsPackageImpl#getTimeStamp()
+		 * @generated
+		 */
+		EClass TIME_STAMP = eINSTANCE.getTimeStamp();
+
+		/**
+		 * The meta object literal for the '<em><b>Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TIME_STAMP__TIME = eINSTANCE.getTimeStamp_Time();
 
 		/**
 		 * The meta object literal for the '{@link Flights.TravelState <em>Travel State</em>}' enum.
