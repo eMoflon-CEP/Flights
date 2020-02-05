@@ -1,7 +1,6 @@
 package org.emoflon.flight.scenario;
 
 /**
- * @author Konrad
  * events that could happen to a flight, scaled from smallest to biggest impact
  *
  */
@@ -18,6 +17,7 @@ public enum ScenarioEvent {
 	WaitingForCrew2H,
 	MechanicalIssues4H,
 	BadWeather4H,
+//  no support for flight cancelation atm
 //	MechanicalIssuesCanceled,
 //	LackOfCrewCanceled
 }
