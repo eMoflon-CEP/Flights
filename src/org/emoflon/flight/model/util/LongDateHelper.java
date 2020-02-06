@@ -68,9 +68,20 @@ public class LongDateHelper {
 	public static long getDate(int day, int month, int year) {
 		return getDate(day, month, year, 0, 0);
 	}
+	/**
+	 * @param dayOfWeek off offset
+	 * @param hour of the offset
+	 * @param min of the offset
+	 * @return the time offset in ms
+	 */
 	public static long getTimeInMs(int dayOfWeek, int hour, int min) {
 		return dayOfWeek*DAYINMS+hour*HOURINMS+min*MINUTEINMS;
 	}
+	/**
+	 * @param hour of the offset
+	 * @param min of the offset
+	 * @return the time offset in ms
+	 */
 	public static long getTimeInMs(int hour, int min) {
 		return getTimeInMs(0, hour, min);
 	}
