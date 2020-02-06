@@ -55,7 +55,8 @@ public class LongDateHelper {
 	 */
 	public static long getDate(int day, int month, int year, int hour, int min) {
 		Calendar cal = Calendar.getInstance();
-		cal.set(year, month, day, hour, min);
+		cal.set(year, month, day, hour, min,0);
+		cal.set(Calendar.MILLISECOND, 0);
 		return cal.getTimeInMillis();
 	}
 	/**
@@ -65,8 +66,12 @@ public class LongDateHelper {
 	 * @return time in milliseconds (see Java-Date)
 	 */
 	public static long getDate(int day, int month, int year) {
-		Calendar cal = Calendar.getInstance();
-		cal.set(year, month, day, 0, 0);
-		return cal.getTimeInMillis();
+		return getDate(day, month, year, 0, 0);
+	}
+	public static long getTimeInMs(int dayOfWeek, int hour, int min) {
+		return dayOfWeek*DAYINMS+hour*HOURINMS+min*MINUTEINMS;
+	}
+	public static long getTimeInMs(int hour, int min) {
+		return getTimeInMs(0, hour, min);
 	}
 }
