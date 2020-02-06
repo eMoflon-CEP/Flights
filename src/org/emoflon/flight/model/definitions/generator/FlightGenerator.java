@@ -3,8 +3,10 @@ package org.emoflon.flight.model.definitions.generator;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.emoflon.flight.model.util.LongDateHelper;
+import org.emoflon.flight.model.util.ModelParser;
 
 public class FlightGenerator {
 	/**
@@ -24,7 +26,7 @@ public class FlightGenerator {
 	public static void main(String[] args) {
 		long tic = System.currentTimeMillis();
 		FlightGenerator fg = new FlightGenerator();
-		ArrayList<String> generatedFlights = fg.generateFlights(repeat);
+		List<String> generatedFlights = fg.generateFlights(repeat,LongDateHelper.getDate(01,01,2020));
 		try {
 			PrintWriter pw = new PrintWriter(filePath);
 			pw.append(header);
@@ -37,63 +39,38 @@ public class FlightGenerator {
 			e.printStackTrace();
 		}
 		long toc = System.currentTimeMillis();
+		
 		System.out.println("Finished in: " + (toc - tic) + " ms");
 	}
-
 	/**
-	 * @param repeat
-	 * @return
+	 * @param fileName of the corresponding '.flightgen' file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @return a list of DummyFlights parsed from the flightgen file.
 	 */
-	private ArrayList<String> generateFlights(int repeat) {
+	private List<DummyFlight> generateDummyFlights(String fileName) {
+		ArrayList<DummyFlight> dummyFlights = new ArrayList<FlightGenerator.DummyFlight>();
+		ArrayList<String[]> dummyFlightStrings = ModelParser.parseFile(fileName);
+		for (String[] dummyFlightString: dummyFlightStrings) {
+			String routeID = dummyFlightString[0];
+			long startDeparture = Long.parseLong(dummyFlightString[1]);
+			long startArrival = Long.parseLong(dummyFlightString[2]);
+			long repeatRate = Long.parseLong(dummyFlightString[3]);
+			String[] planes = dummyFlightString[4].split(",");
+			dummyFlights.add(new DummyFlight(routeID, startDeparture, startArrival, repeatRate, planes));
+		}
+		return dummyFlights;
+	}
+	/**
+	 * @param repeat rate 
+	 * @return a list of flights in a string representation
+	 */
+	private List<String> generateFlights(int repeat, long startDate) {
 		ArrayList<String> flightsString = new ArrayList<String>();
 
-		// all flights with planes in DummyFlight wrapper
-		String[] planesLH630LH631 = { "D-AIKO", "D-AIKL", "D-AIKP", "D-AIKK", "D-AIKF" };
-		DummyFlight LH630 = new DummyFlight(LongDateHelper.getDate(01, 01, 2020, 12, 15),
-				LongDateHelper.getDate(01, 01, 2020, 18, 45), LongDateHelper.DAYINMS, "LH630", planesLH630LH631);
-		DummyFlight LH631 = new DummyFlight(LongDateHelper.getDate(01, 01, 2020, 21, 50),
-				LongDateHelper.getDate(02, 01, 2020, 5, 5), LongDateHelper.DAYINMS, "LH631", planesLH630LH631);
-		String[] planesEK44EK45 = { "A6-EPJ", "A6-EQN", "A6-EQI", "A6-EQP" };
-		DummyFlight EK44 = new DummyFlight(LongDateHelper.getDate(01, 01, 2020, 8, 40),
-				LongDateHelper.getDate(01, 01, 2020, 15, 00), LongDateHelper.DAYINMS, "EK44", planesEK44EK45);
-		DummyFlight EK45 = new DummyFlight(LongDateHelper.getDate(01, 01, 2020, 23, 20),
-				LongDateHelper.getDate(02, 01, 2020, 6, 35), LongDateHelper.DAYINMS, "EK45", planesEK44EK45);
-		String[] planesEK46EK47 = { "A6-EEY", "A6-EDK", "A6-EOJ", "A6-EOU", "A6-EDQ", "A6-EDL", "A6-EUB", "A6-EED" };
-		DummyFlight EK46 = new DummyFlight(LongDateHelper.getDate(01, 01, 2020, 13, 30),
-				LongDateHelper.getDate(01, 01, 2020, 19, 45), LongDateHelper.DAYINMS, "EK46", planesEK46EK47);
-		DummyFlight EK47 = new DummyFlight(LongDateHelper.getDate(01, 01, 2020, 4, 40),
-				LongDateHelper.getDate(01, 01, 2020, 11, 45), LongDateHelper.DAYINMS, "EK47", planesEK46EK47);
-		String[] planesEK48EK49 = { "A6-EOB", "A6-EVK", "A6-EEX", "A6-EUC", "A6-EDU", "A6-EOW", "A6-EOI", "A6-EDG" };
-		DummyFlight EK48 = new DummyFlight(LongDateHelper.getDate(01, 01, 2020, 19, 30),
-				LongDateHelper.getDate(02, 01, 2020, 1, 55), LongDateHelper.DAYINMS, "EK48", planesEK48EK49);
-		DummyFlight EK49 = new DummyFlight(LongDateHelper.getDate(01, 01, 2020, 10, 35),
-				LongDateHelper.getDate(02, 01, 2020, 17, 40), LongDateHelper.DAYINMS, "EK49", planesEK48EK49);
-		String[] planesEK412EK413 = { "A6-EVE", "A6-EUF", "A6-EUK", "A6-EUG", "A6-EUL", "A6-EUJ" };
-		DummyFlight EK412 = new DummyFlight(LongDateHelper.getDate(01, 01, 2020, 6, 15),
-				LongDateHelper.getDate(01, 01, 2020, 20, 0), LongDateHelper.DAYINMS, "EK412", planesEK412EK413);
-		DummyFlight EK413 = new DummyFlight(LongDateHelper.getDate(01, 01, 2020, 10, 10),
-				LongDateHelper.getDate(02, 01, 2020, 0, 40), LongDateHelper.DAYINMS, "EK413", planesEK412EK413);
-		String[] planesEK414EK415 = { "A6-EUU", "A6-EVI", "A6-EUS", "A6-EVJ", "A6-EUS", "A6-EUR", "A6-EVH" };
-		DummyFlight EK414 = new DummyFlight(LongDateHelper.getDate(01, 01, 2020, 22, 00),
-				LongDateHelper.getDate(02, 01, 2020, 11, 30), LongDateHelper.DAYINMS, "EK414", planesEK414EK415);
-		DummyFlight EK415 = new DummyFlight(LongDateHelper.getDate(01, 01, 2020, 19, 00),
-				LongDateHelper.getDate(02, 01, 2020, 9, 10), LongDateHelper.DAYINMS, "EK415", planesEK414EK415);
-		String[] planesEK416EK417 = { "A6-EEO", "A6-EEG", "A6-EDP", "A6-EEF", "A6-EEG", "A6-EEQ", "A6-EEH", "A6-EON",
-				"A6-EOE", "A6-EDZ" };
-		DummyFlight EK416 = new DummyFlight(LongDateHelper.getDate(01, 01, 2020, 18, 50),
-				LongDateHelper.getDate(02, 01, 2020, 8, 40), LongDateHelper.DAYINMS, "EK416", planesEK416EK417);
-		DummyFlight EK417 = new DummyFlight(LongDateHelper.getDate(01, 01, 2020, 5, 15),
-				LongDateHelper.getDate(01, 01, 2020, 19, 15), LongDateHelper.DAYINMS, "EK417", planesEK416EK417);
-
-		DummyFlight[] dummyFlightsStart = { LH630, EK44, EK46, EK48, EK412, EK414, EK416 };
-		DummyFlight[] dummyFlightsBack = { LH631, EK45, EK47, EK49, EK413, EK415, EK417 };
+		List<DummyFlight> dummyFlights = generateDummyFlights("simple.flightgen");
 
 		for (int r = 0; r < repeat; r++) { // loop for repeat
-			for (DummyFlight flight : dummyFlightsStart) { // loop through flights
-				flightsString.add(flight.createString(r));
-			}
-			for (DummyFlight flight : dummyFlightsBack) { // loop through back
-				flightsString.add(flight.createStringBack(r));
+			for (DummyFlight flight : dummyFlights) { // loop through flights
+				flightsString.add(flight.createString(r,startDate));
 			}
 		}
 
@@ -122,7 +99,7 @@ public class FlightGenerator {
 		 */
 		String[] planes;
 
-		public DummyFlight(long startDeparture, long startArrival, long repeatRate, String routeID, String[] planes) {
+		public DummyFlight(String routeID, long startDeparture, long startArrival, long repeatRate, String[] planes) {
 			super();
 			this.startDeparture = startDeparture;
 			this.startArrival = startArrival;
@@ -135,33 +112,33 @@ public class FlightGenerator {
 		 * @param repeat times since start
 		 * @return unique ID for flight with routeID and date
 		 */
-		private String createUID(int repeat) {
-			return routeID + LongDateHelper.getStringDDMMYYYY(getRepeatedDepartureTime(repeat));
+		private String createUID(int repeat, long startDate) {
+			return routeID + LongDateHelper.getStringDDMMYYYY(getRepeatedDepartureTime(repeat,startDate));
 		}
 
 		/**
 		 * @param repeat times since start
 		 * @return departure for repeat-times flight since start
 		 */
-		private long getRepeatedDepartureTime(int repeat) {
-			return startDeparture + (repeat * repeatRate);
+		private long getRepeatedDepartureTime(int repeat, long startDate) {
+			return startDeparture + (repeat * repeatRate) + startDate;
 		}
 
 		/**
 		 * @param repeat times since start
 		 * @return arrival for repeat-times flight since start
 		 */
-		private long getRepeatedArrivalTime(int repeat) {
-			return startArrival + (repeat * repeatRate);
+		private long getRepeatedArrivalTime(int repeat, long startDate) {
+			return startArrival + (repeat * repeatRate) + startDate;
 		}
 
 		/**
 		 * @param repeat times since start
 		 * @return parse-able string representation of the flight without the plane-ID
 		 */
-		private String createStringWithoutPlane(int repeat) {
-			return createUID(repeat) + ";" + routeID + ";" + getRepeatedDepartureTime(repeat) + ";"
-					+ getRepeatedArrivalTime(repeat);
+		private String createStringWithoutPlane(int repeat, long startDate) {
+			return createUID(repeat,startDate) + ";" + routeID + ";" + getRepeatedDepartureTime(repeat,startDate) + ";"
+					+ getRepeatedArrivalTime(repeat,startDate);
 		}
 
 		/**
@@ -169,24 +146,17 @@ public class FlightGenerator {
 		 * @param planeIndex specifies the plane from the array of planes via the index
 		 * @return parse-able string representation of the flight including the plane-ID
 		 */
-		public String createString(int repeat, int planeIndex) {
-			return createStringWithoutPlane(repeat) + ";" + planes[planeIndex];
+		public String createString(int repeat, int planeIndex, long startDate) {
+			return createStringWithoutPlane(repeat,startDate) + ";" + planes[planeIndex];
 		}
 
 		/**
 		 * @param repeat times since start
 		 * @return parse-able string representation of the flight including the plane-ID
 		 */
-		public String createString(int repeat) {
-			return createString(repeat, repeat % planes.length);
+		public String createString(int repeat, long startDate) {
+			return createString(repeat, repeat % planes.length, startDate);
 		}
 
-		/**
-		 * @param repeat times since start
-		 * @return parse-able string representation of the flight including the plane-ID
-		 */
-		public String createStringBack(int repeat) {
-			return createString(repeat, (repeat + 1) % planes.length);
-		}
 	}
 }
