@@ -13,7 +13,7 @@ public class ModelParser {
 	 */
 	public static ArrayList<String[]> parseFile(String fileName) {
 		try {
-			File myObj = new File("src\\org\\emoflon\\flight\\model\\definitions\\" + fileName);
+			File myObj = new File(fileName);
 			ArrayList<String[]> out = new ArrayList<String[]>();
 			Scanner myReader = new Scanner(myObj);
 			while (myReader.hasNextLine()) {
