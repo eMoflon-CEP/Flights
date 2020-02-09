@@ -8,6 +8,7 @@ import java.util.List;
 import org.emoflon.flight.model.util.LongDateHelper;
 import org.emoflon.flight.model.util.ModelParser;
 
+
 public class FlightGenerator {
 	/**
 	 * output path
@@ -22,6 +23,11 @@ public class FlightGenerator {
 	 * number of times the generator should be run (for following days)
 	 */
 	static int repeat = 14;
+	
+	/**
+	 * prevents possible trouble with automatic plane resolve
+	 */
+	private int allTimeRepeat = 0;
 
 	public static void main(String[] args) {
 		long tic = System.currentTimeMillis();
@@ -69,6 +75,7 @@ public class FlightGenerator {
 		List<DummyFlight> dummyFlights = generateDummyFlights("simple.flightgen");
 
 		for (int r = 0; r < repeat; r++) { // loop for repeat
+			allTimeRepeat++;
 			for (DummyFlight flight : dummyFlights) { // loop through flights
 				flightsString.add(flight.createString(r,startDate));
 			}
@@ -155,8 +162,7 @@ public class FlightGenerator {
 		 * @return parse-able string representation of the flight including the plane-ID
 		 */
 		public String createString(int repeat, long startDate) {
-			return createString(repeat, repeat % planes.length, startDate);
+			return createString(repeat, (repeat+allTimeRepeat) % planes.length, startDate);
 		}
-
 	}
 }
