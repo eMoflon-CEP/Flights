@@ -46,7 +46,7 @@ public class BookingGenerator {
 	/**
 	 * number of persons in the person list
 	 */
-	private static int personListSize = 1400;
+	private static int personListSize = 14000;
 	/**
 	 * declares when looping through the person list again
 	 */
