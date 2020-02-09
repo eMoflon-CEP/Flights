@@ -67,11 +67,24 @@ public class BookingGenerator {
 	 * offset in persons list
 	 */
 	private int offset = 0;
+	/**
+	 * list of dummy connecting flights for booking generation
+	 */
+	private List<DummyFlight[]> connectingFlights;
+	/**
+	 * list of dummy non-connecting flights for booking generation
+	 */
+	private List<DummyFlight[]> nonConnectingFlights;
+	/**
+	 * random for group building
+	 */
+	private Random ran = new Random(groupSeed);
+	
 	public static void main(String[] args) {
 		long tic = System.currentTimeMillis();
 		try {
 			PrintWriter pw = new PrintWriter(filePath);
-			BookingGenerator bg = new BookingGenerator();
+			BookingGenerator bg = new BookingGenerator("simple.bookingcflightgen","simple.bookingncflightgen");
 
 			List<String> generatedBookings = bg.generateBookings(repeat);
 			pw.append(header);
@@ -86,25 +99,36 @@ public class BookingGenerator {
 		long toc = System.currentTimeMillis();
 		System.out.println("Finished in: " + (toc - tic) + " ms");
 	}
-
+	/**
+	 * @param fileNameConnectingFlights of the ".bookingcflightgen" file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param fileNameNonConnectingFlights of the ".bookingncflightgen" file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 */
+	public BookingGenerator(String fileNameConnectingFlights, String fileNameNonConnectingFlights) {
+		connectingFlights = parseFlights(fileNameConnectingFlights);
+		nonConnectingFlights = parseFlights(fileNameNonConnectingFlights);
+	}
+	/**
+	 * @param repeat times to repeat generation staring from startDate
+	 * @return a List containing bookings including travels in string format
+	 */
 	private List<String> generateBookings(int repeat) {
-		ArrayList<String> bookings = new ArrayList<String>();
-		// getting possible travels
-		List<DummyFlight[]> connectingFlights = parseFlights("simple.bookCFlight");
-		List<DummyFlight[]> nonConnectingFlights = parseFlights("simple.bookNCFlight");
-		
-		Random ran = new Random(groupSeed);
-		
+		ArrayList<String> bookings = new ArrayList<String>();		
 		
 		for (int rep = 0; rep <= repeat; rep++) { // loop for repeating days
 			String date = LongDateHelper.getStringDDMMYYYY((startDate + rep * LongDateHelper.DAYINMS));
-			addFlightsToBookingForRepDate(connectingFlights, rep, date, ran, bookings, connectingBookingRate);
-			addFlightsToBookingForRepDate(nonConnectingFlights, rep, date, ran, bookings, normalBookingRate);
+			addFlightsToBookingForRepDate(connectingFlights, rep, date, bookings, connectingBookingRate);
+			addFlightsToBookingForRepDate(nonConnectingFlights, rep, date, bookings, normalBookingRate);
 		}
 		return bookings;
 	}
-	
-	private void addFlightsToBookingForRepDate(List<DummyFlight[]> flightList, int rep, String date, Random ran, ArrayList<String> bookings, double bookingRate) {
+	/**
+	 * @param flightList a List containing dummy flight arrays with possible route combinations
+	 * @param rep since startDate
+	 * @param date string representation of current date
+	 * @param bookings list of bookings in string format
+	 * @param bookingRate booking rate for given flight combinations
+	 */
+	private void addFlightsToBookingForRepDate(List<DummyFlight[]> flightList, int rep, String date, List<String> bookings, double bookingRate) {
 		for (DummyFlight[] flights : flightList) { // loop for connecting flights
 			// string-array representation of flights in connecting travel
 			String[] flightsString = new String[flights.length];
@@ -117,7 +141,7 @@ public class BookingGenerator {
 			for (int person = offset; person < personsOnFlight + offset; person++) { // loop though persons
 				// TODO: possibility for more than one travel a day / person
 				String bookingNo = personStrings[person % loop] + date;
-				int groupSize = Math.min(ran.nextInt(maxGroupSize) + 1, personsOnFlight);
+				int groupSize = Math.min(ran.nextInt(maxGroupSize) + 1, personsOnFlight + offset - person);
 				// creating travels
 				DummyTravel[] travels = new DummyTravel[groupSize];
 				for (int personsInBooking = 0; personsInBooking < groupSize; personsInBooking++) {
@@ -129,8 +153,11 @@ public class BookingGenerator {
 			}
 			offset += personsOnFlight; // increment offset for looping through persons
 		}
-	}
-	
+	}	
+	/**
+	 * @param fileName of the ".bookingcflightgen" or ".bookingncflightgen" file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @return a List containing dummy flight arrays with possible route combinations
+	 */
 	private List<DummyFlight[]> parseFlights(String fileName) {
 		ArrayList<DummyFlight[]> flightCombos = new ArrayList<DummyFlight[]>();
 		ArrayList<String[]> dummyCFlightStrings = ModelParser.parseFile(fileName);
@@ -168,7 +195,6 @@ public class BookingGenerator {
 			this.capacity = capacity;
 			this.offset = offset;
 		}
-
 		/**
 		 * @param repeat since startDate
 		 * @param startDate in ms (see Java.Date)
@@ -178,7 +204,6 @@ public class BookingGenerator {
 			long time = startDate + (repeat + offset) * LongDateHelper.DAYINMS;
 			return routeID + LongDateHelper.getStringDDMMYYYY(time);
 		}
-
 	}
 
 	class DummyBooking {
