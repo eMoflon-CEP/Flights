@@ -40,6 +40,7 @@
         eType="#//TimeStamp" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="arrival" lowerBound="1"
         eType="#//TimeStamp" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="newAttribute" eType="#//FlightState"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Bookings">
     <eStructuralFeatures xsi:type="ecore:EReference" name="bookings" upperBound="-1"
@@ -115,5 +116,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TimeStamp">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FlightState">
+    <eLiterals name="planned"/>
+    <eLiterals name="inFlight" value="1"/>
+    <eLiterals name="completed" value="2"/>
   </eClassifiers>
 </ecore:EPackage>
