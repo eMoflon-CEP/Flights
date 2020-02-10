@@ -31,10 +31,6 @@ public class BookingGenerator {
 	 */
 	private static int daysBetweenTravels = 2;
 	/**
-	 * minimum capacity of all planes
-	 */
-	private static int minFlightCapacity = 215;
-	/**
 	 * rate of minimum plane capacity used for connecting flights
 	 * (per connecting route)
 	 */
@@ -50,7 +46,7 @@ public class BookingGenerator {
 	/**
 	 * number of persons in the person list
 	 */
-	private static int personListSize = 1400;
+	private static int personListSize = 14000;
 	/**
 	 * declares when looping through the person list again
 	 */
@@ -63,12 +59,32 @@ public class BookingGenerator {
 	 * start date for the generator
 	 */
 	private static long startDate = LongDateHelper.getDate(01, 01, 2020);
-
+	/**
+	 * seed for group building
+	 */
+	private static long groupSeed = 12345678;
+	/**
+	 * offset in persons list
+	 */
+	private int offset = 0;
+	/**
+	 * list of dummy connecting flights for booking generation
+	 */
+	private List<DummyFlight[]> connectingFlights;
+	/**
+	 * list of dummy non-connecting flights for booking generation
+	 */
+	private List<DummyFlight[]> nonConnectingFlights;
+	/**
+	 * random for group building
+	 */
+	private Random ran = new Random(groupSeed);
+	
 	public static void main(String[] args) {
 		long tic = System.currentTimeMillis();
 		try {
 			PrintWriter pw = new PrintWriter(filePath);
-			BookingGenerator bg = new BookingGenerator();
+			BookingGenerator bg = new BookingGenerator("simple.bookingcflightgen","simple.bookingncflightgen");
 
 			List<String> generatedBookings = bg.generateBookings(repeat);
 			pw.append(header);
@@ -83,117 +99,79 @@ public class BookingGenerator {
 		long toc = System.currentTimeMillis();
 		System.out.println("Finished in: " + (toc - tic) + " ms");
 	}
-
+	/**
+	 * @param fileNameConnectingFlights of the ".bookingcflightgen" file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param fileNameNonConnectingFlights of the ".bookingncflightgen" file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 */
+	public BookingGenerator(String fileNameConnectingFlights, String fileNameNonConnectingFlights) {
+		connectingFlights = parseFlights(fileNameConnectingFlights);
+		nonConnectingFlights = parseFlights(fileNameNonConnectingFlights);
+	}
+	/**
+	 * @param repeat times to repeat generation staring from startDate
+	 * @return a List containing bookings including travels in string format
+	 */
 	private List<String> generateBookings(int repeat) {
-		ArrayList<String> bookings = new ArrayList<String>();
-		// getting possible travels
-		List<DummyFlight[]> connectingFlights = getUnnescessaryFiddlyList(0);
-		List<DummyFlight[]> nonConnectingFlights = getUnnescessaryFiddlyList(1);
-		
-		Random ran = new Random();
-		int offset = 0;
+		ArrayList<String> bookings = new ArrayList<String>();		
 		
 		for (int rep = 0; rep <= repeat; rep++) { // loop for repeating days
 			String date = LongDateHelper.getStringDDMMYYYY((startDate + rep * LongDateHelper.DAYINMS));
-			for (DummyFlight[] flights : connectingFlights) { // loop for connecting flights
-				// string-array representation of flights in connecting travel
-				String[] flightsString = new String[flights.length];
-				for (int numFlights = 0; numFlights < flights.length; numFlights++)
-					flightsString[numFlights] = flights[numFlights].getUUIDForDate(rep, startDate);
-				int personsOnFlight = (int) (minFlightCapacity * connectingBookingRate);
-				for (int person = offset; person < personsOnFlight + offset; person++) { // loop though persons
-					// TODO: possibility for more than one travel a day / person
-					String bookingNo = personStrings[person % loop] + date;
-					int groupSize = Math.min(ran.nextInt(maxGroupSize) + 1, personsOnFlight);
-					// creating travels
-					DummyTravel[] travels = new DummyTravel[groupSize];
-					for (int personsInBooking = 0; personsInBooking < groupSize; personsInBooking++) {
-						String personString = personStrings[(person + personsInBooking) % loop];
-						travels[personsInBooking] = new DummyTravel(personString, flightsString);
-					}
-					person += groupSize - 1; // already incremented one
-					bookings.add(new DummyBooking(bookingNo, travels).toString());
-				}
-				offset += personsOnFlight; // increment offset for looping through persons
-			}
-
-			for (DummyFlight[] flights : nonConnectingFlights) { // loop for non-connecting flights
-				// string-array representation of the flight
-				String[] flightsString = { flights[0].getUUIDForDate(rep, startDate) };
-				int personsOnFlight = (int) (flights[0].capacity * normalBookingRate);
-				for (int person = offset; person < personsOnFlight + offset; person++) { // loop though persons
-					// TODO: possibility for more than one travel a day / person
-					String bookingNo = personStrings[person % loop] + date;
-					int groupSize = Math.min(ran.nextInt(maxGroupSize) + 1, personsOnFlight);
-					// creating travels
-					DummyTravel[] travels = new DummyTravel[groupSize];
-					for (int personsInBooking = 0; personsInBooking < groupSize; personsInBooking++) {
-						String personString = personStrings[(person + personsInBooking) % loop];
-						travels[personsInBooking] = new DummyTravel(personString, flightsString);
-					}
-					person += groupSize - 1; // already incremented one
-					bookings.add(new DummyBooking(bookingNo, travels).toString());
-				}
-				offset += personsOnFlight; // increment offset for looping through persons
-			}
+			addFlightsToBookingForRepDate(connectingFlights, rep, date, bookings, connectingBookingRate);
+			addFlightsToBookingForRepDate(nonConnectingFlights, rep, date, bookings, normalBookingRate);
 		}
 		return bookings;
 	}
-
 	/**
-	 * @param switcher declares whether the output should be connecting flights (0) or non-connecting flights (1)
-	 * @return list including arrays of flights defining possible travels
+	 * @param flightList a List containing dummy flight arrays with possible route combinations
+	 * @param rep since startDate
+	 * @param date string representation of current date
+	 * @param bookings list of bookings in string format
+	 * @param bookingRate booking rate for given flight combinations
 	 */
-	private List<DummyFlight[]> getUnnescessaryFiddlyList(int switcher) {
+	private void addFlightsToBookingForRepDate(List<DummyFlight[]> flightList, int rep, String date, List<String> bookings, double bookingRate) {
+		for (DummyFlight[] flights : flightList) { // loop for connecting flights
+			// string-array representation of flights in connecting travel
+			String[] flightsString = new String[flights.length];
+			int minCapacity = flights[0].capacity;
+			for (int numFlights = 0; numFlights < flights.length; numFlights++) {
+				minCapacity = Math.min(minCapacity, flights[numFlights].capacity);
+				flightsString[numFlights] = flights[numFlights].getUUIDForDate(rep, startDate);
+			}
+			int personsOnFlight = (int) (minCapacity * bookingRate);
+			for (int person = offset; person < personsOnFlight + offset; person++) { // loop though persons
+				// TODO: possibility for more than one travel a day / person
+				String bookingNo = personStrings[person % loop] + date;
+				int groupSize = Math.min(ran.nextInt(maxGroupSize) + 1, personsOnFlight + offset - person);
+				// creating travels
+				DummyTravel[] travels = new DummyTravel[groupSize];
+				for (int personsInBooking = 0; personsInBooking < groupSize; personsInBooking++) {
+					String personString = personStrings[(person + personsInBooking) % loop];
+					travels[personsInBooking] = new DummyTravel(personString, flightsString);
+				}
+				person += groupSize - 1; // already incremented one
+				bookings.add(new DummyBooking(bookingNo, travels).toString());
+			}
+			offset += personsOnFlight; // increment offset for looping through persons
+		}
+	}	
+	/**
+	 * @param fileName of the ".bookingcflightgen" or ".bookingncflightgen" file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @return a List containing dummy flight arrays with possible route combinations
+	 */
+	private List<DummyFlight[]> parseFlights(String fileName) {
 		ArrayList<DummyFlight[]> flightCombos = new ArrayList<DummyFlight[]>();
-
-		if (switcher == 0) {
-			// ConnectingFlights
-			DummyFlight[] LH630EK414 = { new DummyFlight("LH630", 221, 0), new DummyFlight("EK414", 364, 0) };
-			DummyFlight[] EK44EK416 = { new DummyFlight("EK44", 364, 0), new DummyFlight("EK416", 489, 0) };
-			DummyFlight[] EK46EK414 = { new DummyFlight("EK46", 489, 0), new DummyFlight("EK414", 489, 0) };
-			DummyFlight[] EK48EK412 = { new DummyFlight("EK48", 489, 0), new DummyFlight("EK412", 489, 1) };
-			flightCombos.add(LH630EK414);
-			flightCombos.add(EK44EK416);
-			flightCombos.add(EK46EK414);
-			flightCombos.add(EK48EK412);
-			DummyFlight[] EK417LH631 = { new DummyFlight("EK417", 489, 0), new DummyFlight("LH631", 221, 0) };
-			DummyFlight[] EK415EK49 = { new DummyFlight("EK415", 489, 0), new DummyFlight("EK49", 489, 1) };
-			DummyFlight[] EK413EK47 = { new DummyFlight("EK413", 489, 0), new DummyFlight("EK47", 489, 1) };
-			flightCombos.add(EK417LH631);
-			flightCombos.add(EK415EK49);
-			flightCombos.add(EK413EK47);
-		} else
-		// Non connecting Flights
-		{
-			DummyFlight[] EK44 = { new DummyFlight("EK44", 364, 0) };
-			DummyFlight[] EK45 = { new DummyFlight("EK45", 364, 0) };
-			DummyFlight[] EK46 = { new DummyFlight("EK46", 489, 0) };
-			DummyFlight[] EK47 = { new DummyFlight("EK47", 489, 0) };
-			DummyFlight[] EK48 = { new DummyFlight("EK48", 489, 0) };
-			DummyFlight[] EK49 = { new DummyFlight("EK49", 489, 0) };
-			DummyFlight[] LH630 = { new DummyFlight("LH630", 221, 0) };
-			DummyFlight[] LH631 = { new DummyFlight("LH631", 221, 0) };
-			flightCombos.add(EK44);
-			flightCombos.add(EK45);
-			flightCombos.add(EK46);
-			flightCombos.add(EK47);
-			flightCombos.add(EK48);
-			flightCombos.add(EK49);
-			flightCombos.add(LH630);
-			flightCombos.add(LH631);
-			DummyFlight[] EK412 = { new DummyFlight("EK412", 489, 0) };
-			DummyFlight[] EK413 = { new DummyFlight("EK413", 489, 0) };
-			DummyFlight[] EK414 = { new DummyFlight("EK414", 364, 0) };
-			DummyFlight[] EK415 = { new DummyFlight("EK415", 489, 0) };
-			DummyFlight[] EK416 = { new DummyFlight("EK416", 489, 0) };
-			DummyFlight[] EK417 = { new DummyFlight("EK417", 489, 0) };
-			flightCombos.add(EK412);
-			flightCombos.add(EK413);
-			flightCombos.add(EK414);
-			flightCombos.add(EK415);
-			flightCombos.add(EK416);
-			flightCombos.add(EK417);
+		ArrayList<String[]> dummyCFlightStrings = ModelParser.parseFile(fileName);
+		for(String[] dummyCFlightString : dummyCFlightStrings) {
+			DummyFlight[] dummyFlights = new DummyFlight[dummyCFlightString.length];
+			for(int i=0; i < dummyCFlightString.length;i++) {
+				String dummyFlightString = dummyCFlightString[i];
+				String[] splitDummyFlight = dummyFlightString.split(",");
+				String routeID = splitDummyFlight[0];
+				int capacity = Integer.parseInt(splitDummyFlight[1]);
+				int offset = Integer.parseInt(splitDummyFlight[2]);
+				dummyFlights[i] = new DummyFlight(routeID, capacity, offset);
+			}
+			flightCombos.add(dummyFlights);
 		}
 		return flightCombos;
 	}
@@ -217,7 +195,6 @@ public class BookingGenerator {
 			this.capacity = capacity;
 			this.offset = offset;
 		}
-
 		/**
 		 * @param repeat since startDate
 		 * @param startDate in ms (see Java.Date)
@@ -227,7 +204,6 @@ public class BookingGenerator {
 			long time = startDate + (repeat + offset) * LongDateHelper.DAYINMS;
 			return routeID + LongDateHelper.getStringDDMMYYYY(time);
 		}
-
 	}
 
 	class DummyBooking {
