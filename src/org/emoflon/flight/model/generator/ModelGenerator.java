@@ -19,6 +19,7 @@ import Flights.Plane;
 import Flights.Planes;
 import Flights.Route;
 import Flights.Routes;
+import Flights.TimeStamp;
 import Flights.Travel;
 
 public class ModelGenerator {
@@ -342,8 +343,12 @@ public class ModelGenerator {
 			Gate target) {
 		Flight flight = factory.createFlight();
 		flight.setID(ID);
-		flight.setDeparture(departure);
-		flight.setArrival(arrival);
+		TimeStamp departureStamp = factory.createTimeStamp();
+		departureStamp.setTime(departure);
+		flight.setDeparture(departureStamp);
+		TimeStamp arrivalStamp = factory.createTimeStamp();
+		arrivalStamp.setTime(arrival);
+		flight.setArrival(arrivalStamp);
 		flight.setRoute(route);
 		flight.setPlane(plane);
 		flight.setSrc(source);
