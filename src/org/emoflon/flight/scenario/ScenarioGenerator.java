@@ -8,6 +8,8 @@ import org.emoflon.flight.model.util.LongDateHelper;
 
 import Flights.Flight;
 import Flights.FlightContainer;
+import Flights.FlightsFactory;
+import Flights.TimeStamp;
 
 public class ScenarioGenerator {
 	/**
@@ -112,7 +114,7 @@ public class ScenarioGenerator {
 	private List<Flight> filterFlights(FlightContainer flights, long currentTime, long timeFrame) {
 		List<Flight> filteredFlights = new ArrayList<Flight>();
 		for (Flight flight : flights.getFlights()) {
-			if (currentTime <= flight.getArrival() && flight.getArrival() <= (currentTime + timeFrame))
+			if (currentTime <= flight.getArrival().getTime() && flight.getArrival().getTime() <= (currentTime + timeFrame))
 				filteredFlights.add(flight);
 		}
 		return filteredFlights;
@@ -123,50 +125,53 @@ public class ScenarioGenerator {
 	 * @param flight for which the event should happen
 	 */
 	private void runEvent(ScenarioEvent event, Flight flight) {
-		long arrival = flight.getArrival();
+		long arrival = flight.getArrival().getTime();
+		TimeStamp arrivalStamp = FlightsFactory.eINSTANCE.createTimeStamp();
 
 		switch (event) {
 		case BackWind05HEarly:
-			flight.setArrival(arrival - LongDateHelper.HOURINMS / 2);
+			arrivalStamp.setTime(arrival - LongDateHelper.HOURINMS / 2);
 			break;
 		case MisssingClearens05H:
-			flight.setArrival(arrival + LongDateHelper.HOURINMS / 2);
+			arrivalStamp.setTime(arrival + LongDateHelper.HOURINMS / 2);
 			break;
 		case MisssingClearens1H:
-			flight.setArrival(arrival + LongDateHelper.HOURINMS);
+			arrivalStamp.setTime(arrival + LongDateHelper.HOURINMS);
 			break;
 		case BadWeather1H:
-			flight.setArrival(arrival + LongDateHelper.HOURINMS);
+			arrivalStamp.setTime(arrival + LongDateHelper.HOURINMS);
 			break;
 		case MechanicalIssues1H:
-			flight.setArrival(arrival + LongDateHelper.HOURINMS);
+			arrivalStamp.setTime(arrival + LongDateHelper.HOURINMS);
 			break;
 		case WaitingForCrew1H:
-			flight.setArrival(arrival + LongDateHelper.HOURINMS);
+			arrivalStamp.setTime(arrival + LongDateHelper.HOURINMS);
 			break;
 		case BadWeather2H:
-			flight.setArrival(arrival + LongDateHelper.HOURINMS * 2);
+			arrivalStamp.setTime(arrival + LongDateHelper.HOURINMS * 2);
 			break;
 		case MechanicalIssues2H:
-			flight.setArrival(arrival + LongDateHelper.HOURINMS * 2);
+			arrivalStamp.setTime(arrival + LongDateHelper.HOURINMS * 2);
 			break;
 		case BirdStrike2H:
-			flight.setArrival(arrival + LongDateHelper.HOURINMS * 2);
+			arrivalStamp.setTime(arrival + LongDateHelper.HOURINMS * 2);
 			break;
 		case WaitingForCrew2H:
-			flight.setArrival(arrival + LongDateHelper.HOURINMS * 2);
+			arrivalStamp.setTime(arrival + LongDateHelper.HOURINMS * 2);
 			break;
 		case MechanicalIssues4H:
-			flight.setArrival(arrival + LongDateHelper.HOURINMS * 4);
+			arrivalStamp.setTime(arrival + LongDateHelper.HOURINMS * 4);
 			break;
 		case BadWeather4H:
-			flight.setArrival(arrival + LongDateHelper.HOURINMS * 4);
+			arrivalStamp.setTime(arrival + LongDateHelper.HOURINMS * 4);
 			break;
 		// TODO handle canceled Flights
 
 		default:
 			break;
 		}
+		
+		flight.setArrival(arrivalStamp);
 	}
 
 }

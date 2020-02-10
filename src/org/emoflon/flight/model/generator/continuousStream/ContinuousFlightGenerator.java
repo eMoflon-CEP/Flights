@@ -13,6 +13,7 @@ import Flights.Plane;
 import Flights.Planes;
 import Flights.Route;
 import Flights.Routes;
+import Flights.TimeStamp;
 
 public class ContinuousFlightGenerator extends ModelGenerator{
 	/**
@@ -135,8 +136,12 @@ public class ContinuousFlightGenerator extends ModelGenerator{
 		public Flight convertToFlight(int repeat, int planeIndex, long startDate) {
 			Flight flight = factory.createFlight();
 			flight.setID(createUFlightID(startDate, repeat));
-			flight.setDeparture(getRepeatedDepartureTime(repeat, startDate));
-			flight.setArrival(getRepeatedArrivalTime(repeat, startDate));
+			TimeStamp departureStamp = factory.createTimeStamp();
+			departureStamp.setTime(getRepeatedDepartureTime(repeat, startDate));
+			flight.setDeparture(departureStamp);
+			TimeStamp arrivalStamp = factory.createTimeStamp();
+			arrivalStamp.setTime(getRepeatedArrivalTime(repeat, startDate));
+			flight.setArrival(arrivalStamp);
 			flight.setRoute(route);
 			flight.setPlane(planes[planeIndex]);
 			
