@@ -24,6 +24,8 @@ public class PersonGenerator {
 	 */
 	private static String[] allowedAlphabet = { "C", "F", "G", "H", "J", "K", "L", "M", "N", "P", "R", "T", "V", "W", "X", "Y",
 			"Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+	private static long personSeed = 42;
+	
 	public static void main(String[] args) {
 		long tic = System.currentTimeMillis();
 		PersonGenerator pg = new PersonGenerator();
@@ -49,7 +51,7 @@ public class PersonGenerator {
 	private List<String> generatePersons(int amount) {
 		ArrayList<String> generatedPersons = new ArrayList<String>();
 		int alphabetLength = allowedAlphabet.length;
-		Random ran = new Random();
+		Random ran = new Random(personSeed);
 
 		for (int i = 0; i < amount; i++) {
 			String personID = allowedAlphabet[ran.nextInt(alphabetLength)];
