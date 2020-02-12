@@ -13,7 +13,11 @@ public class FlightGenerator {
 	/**
 	 * output path
 	 */
-	static String filePath = "src\\org\\emoflon\\flight\\model\\definitions\\simple.flights";
+	static String outFilePath = "src\\org\\emoflon\\flight\\model\\definitions\\simple.flights";
+	/**
+	 * Path to the '.flightgen' gen file
+	 */
+	static String genFilePath = "src\\org\\emoflon\\flight\\model\\definitions\\simple.flightgen";
 	/**
 	 * output header
 	 */
@@ -34,7 +38,7 @@ public class FlightGenerator {
 		FlightGenerator fg = new FlightGenerator();
 		List<String> generatedFlights = fg.generateFlights(repeat,LongDateHelper.getDate(01,01,2020));
 		try {
-			PrintWriter pw = new PrintWriter(filePath);
+			PrintWriter pw = new PrintWriter(outFilePath);
 			pw.append(header);
 			for (String s : generatedFlights) {
 				pw.append(s + "\n");
@@ -72,7 +76,7 @@ public class FlightGenerator {
 	private List<String> generateFlights(int repeat, long startDate) {
 		ArrayList<String> flightsString = new ArrayList<String>();
 
-		List<DummyFlight> dummyFlights = generateDummyFlights("simple.flightgen");
+		List<DummyFlight> dummyFlights = generateDummyFlights(genFilePath);
 
 		for (int r = 0; r < repeat; r++) { // loop for repeat
 			allTimeRepeat++;

@@ -29,12 +29,12 @@ public class ContinuousFlightGenerator extends ModelGenerator{
 	 */
 	private List<DummyFlight> dummyFlights;
 	/**
-	 * @param fileName of the corresponding '.flightgen' file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param filePath of the corresponding '.flightgen' file
 	 * @param routes in the model to map to the dummy flights
 	 * @param planes in the model to map to the dummy flights
 	 */
-	public ContinuousFlightGenerator(String fileName, Routes routes, Planes planes) {
-		dummyFlights = generateDummyFlights(fileName, routes, planes);
+	public ContinuousFlightGenerator(String filePath, Routes routes, Planes planes) {
+		dummyFlights = generateDummyFlights(filePath, routes, planes);
 	}
 	/**
 	 * @param repeat rate
@@ -52,14 +52,14 @@ public class ContinuousFlightGenerator extends ModelGenerator{
 		return flights;
 	}
 	/**
-	 * @param fileName of the corresponding '.flightgen' file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param filePath of the corresponding '.flightgen' file
 	 * @param routes in the model to map to the dummy flights
 	 * @param planes in the model to map to the dummy flights
 	 * @return a parsed list of dummy flights
 	 */
-	private List<DummyFlight> generateDummyFlights(String fileName, Routes routes, Planes planes) {
+	private List<DummyFlight> generateDummyFlights(String filePath, Routes routes, Planes planes) {
 		ArrayList<DummyFlight> dummyFlights = new ArrayList<DummyFlight>();
-		ArrayList<String[]> dummyFlightStrings = ModelParser.parseFile(fileName);
+		ArrayList<String[]> dummyFlightStrings = ModelParser.parseFile(filePath);
 		for (String[] dummyFlightString: dummyFlightStrings) {
 			String routeID = dummyFlightString[0];
 			long startDeparture = Long.parseLong(dummyFlightString[1]);

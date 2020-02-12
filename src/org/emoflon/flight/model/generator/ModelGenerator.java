@@ -102,7 +102,7 @@ public class ModelGenerator {
 		return null;
 	}
 	/**
-	 * @param fileName of the corresponding '.airports' file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param fileName of the corresponding '.airports' file
 	 * @return an airport container filled with airport parsed from the '.airports' file
 	 */
 	protected Airports parseAirportsWithGates(String fileName) {
@@ -112,7 +112,7 @@ public class ModelGenerator {
 		return airports;
 	}
 	/**
-	 * @param fileName of the corresponding '.airports' file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param fileName of the corresponding '.airports' file
 	 * @return a list of airports filled with airport objects parsed from the '.airports' file
 	 */
 	protected List<Airport> parseAirprortListWithGates(String fileName) {
@@ -128,7 +128,7 @@ public class ModelGenerator {
 		return airportList;
 	}
 	/**
-	 * @param fileName of the corresponding '.routes' file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param fileName of the corresponding '.routes' file
 	 * @param airports containing all airports named in the '.routes' file
 	 * @return a route container filled with route objects parsed from the '.routes' file
 	 */
@@ -139,7 +139,7 @@ public class ModelGenerator {
 		return routes;
 	}
 	/**
-	 * @param fileName of the corresponding '.routes' file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param fileName of the corresponding '.routes' file
 	 * @param airports containing all airports named in the '.routes' file
 	 * @return a route list filled with route objects parsed from the '.routes' file
 	 */
@@ -159,7 +159,7 @@ public class ModelGenerator {
 	}
 	
 	/**
-	 * @param fileName of the corresponding '.flights' file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param fileName of the corresponding '.flights' file
 	 * @param airports containing all airports named in the '.flights' file
 	 * @param routes containing all routes named in the '.flights' file
 	 * @param planes containing all planes named in the '.flights' file
@@ -172,7 +172,7 @@ public class ModelGenerator {
 		return flights;
 	}
 	/**
-	 * @param fileName of the corresponding '.flights' file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param fileName of the corresponding '.flights' file
 	 * @param airports containing all airports named in the '.flights' file
 	 * @param routes containing all routes named in the '.flights' file
 	 * @param planes containing all planes named in the '.flights' file
@@ -198,7 +198,7 @@ public class ModelGenerator {
 		return flights;
 	}
 	/**
-	 * @param fileName of the corresponding '.planes' file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param fileName of the corresponding '.planes' file
 	 * @return a plane container filled with plane objects parsed from the '.planes' file
 	 */
 	protected Planes parsePlanes(String fileName) {
@@ -209,7 +209,7 @@ public class ModelGenerator {
 		return planes;
 	}
 	/**
-	 * @param fileName of the corresponding '.planes' file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param fileName of the corresponding '.planes' file
 	 * @return a plane list filled with plane objects parsed from the '.planes' file
 	 */
 	protected List<Plane> parsePlaneList(String fileName) {
@@ -224,7 +224,7 @@ public class ModelGenerator {
 		return planeList;
 	}
 	/**
-	 * @param fileName of the corresponding '.persons' file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param fileName of the corresponding '.persons' file
 	 * @return a person container filled with person objects parsed from the '.persons' file
 	 */
 	protected Persons parsePersons(String fileName) {
@@ -234,7 +234,7 @@ public class ModelGenerator {
 		return persons;
 	}
 	/**
-	 * @param fileName of the corresponding '.persons' file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param fileName of the corresponding '.persons' file
 	 * @return a person list filled with person objects parsed from the '.persons' file
 	 */
 	protected List<Person> parsePersonList(String fileName) {
@@ -246,7 +246,7 @@ public class ModelGenerator {
 		return personList;
 	}
 	/**
-	 * @param fileName of the corresponding '.bookings' file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param fileName of the corresponding '.bookings' file
 	 * @param persons containing all persons named in the '.bookings' file
 	 * @param flightContainer containing all bookings named in the '.bookings' file
 	 * @return a booking container filled with bookings objects parsed from the '.bookings' file
@@ -258,7 +258,7 @@ public class ModelGenerator {
 		return bookings;
 	}
 	/**
-	 * @param fileName of the corresponding '.bookings' file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param fileName of the corresponding '.bookings' file
 	 * @param persons containing all persons named in the '.bookings' file
 	 * @param flightContainer containing all bookings named in the '.bookings' file
 	 * @return a booking list filled with bookings objects parsed from the '.bookings' file

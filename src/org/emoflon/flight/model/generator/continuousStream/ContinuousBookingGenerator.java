@@ -71,13 +71,13 @@ public class ContinuousBookingGenerator extends ModelGenerator{
 	
 	
 	/**
-	 * @param fileNameConnectingFlights of the ".bookingcflightgen" file in '/Flights/src/org/emoflon/flight/model/definitions'
-	 * @param fileNameNonConnectingFlights of the ".bookingncflightgen" file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param filePathConnectingFlights of the ".bookingcflightgen" file
+	 * @param filePathNonConnectingFlights of the ".bookingncflightgen" file
 	 * @param persons list including the persons that should be mapped to the bookings
 	 */
-	public ContinuousBookingGenerator(String fileNameConnectingFlights, String fileNameNonConnectingFlights, List<Person> persons) {
-		connectingFlights = parseFlights(fileNameConnectingFlights);
-		nonConnectingFlights = parseFlights(fileNameNonConnectingFlights);
+	public ContinuousBookingGenerator(String filePathConnectingFlights, String filePathNonConnectingFlights, List<Person> persons) {
+		connectingFlights = parseFlights(filePathConnectingFlights);
+		nonConnectingFlights = parseFlights(filePathNonConnectingFlights);
 		this.persons = persons;
 		this.personListSize = persons.size();
 		this.loop = Math.min(bookingsPerDay * daysBetweenTravels, personListSize);
@@ -134,12 +134,12 @@ public class ContinuousBookingGenerator extends ModelGenerator{
 		return bookings;
 	}
 	/**
-	 * @param fileName of the ".bookingcflightgen" or ".bookingncflightgen" file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param filePath of the ".bookingcflightgen" or ".bookingncflightgen" file
 	 * @return a List containing dummy flight arrays with possible route combinations
 	 */
-	private List<DummyFlight[]> parseFlights(String fileName) {
+	private List<DummyFlight[]> parseFlights(String filePath) {
 		List<DummyFlight[]> flightCombos = new ArrayList<DummyFlight[]>();
-		List<String[]> dummyCFlightStrings = ModelParser.parseFile(fileName);
+		List<String[]> dummyCFlightStrings = ModelParser.parseFile(filePath);
 		for(String[] dummyCFlightString : dummyCFlightStrings) {
 			DummyFlight[] dummyFlights = new DummyFlight[dummyCFlightString.length];
 			for(int i=0; i < dummyCFlightString.length;i++) {

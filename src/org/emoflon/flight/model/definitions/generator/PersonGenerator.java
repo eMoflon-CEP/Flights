@@ -10,7 +10,7 @@ public class PersonGenerator {
 	/**
 	 * output path
 	 */
-	static String filePath = "src\\org\\emoflon\\flight\\model\\definitions\\simple.persons";
+	static String outFilePath = "src\\org\\emoflon\\flight\\model\\definitions\\simple.persons";
 	/**
 	 * output header
 	 */
@@ -31,7 +31,7 @@ public class PersonGenerator {
 		PersonGenerator pg = new PersonGenerator();
 		List<String> generatedPersons = pg.generatePersons(amount);
 		try {
-			PrintWriter pw = new PrintWriter(filePath);
+			PrintWriter pw = new PrintWriter(outFilePath);
 			for (String s: generatedPersons)
 				pw.append(s + "\n");
 			pw.flush();
