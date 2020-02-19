@@ -69,6 +69,17 @@ public class ScenarioGenerator {
 		ranFlight = new Random(flightSeed);
 		ranChaos = new Random(chaosSeed);
 	}
+	
+	/**
+	 * @param flights list of flights, that should be included in this scenario
+	 */
+	public void runScenario(final Flight flight, double eventProbability) {
+		if(ranChaos.nextDouble()<eventProbability) {
+			ScenarioEvent event = ScenarioEvent.values()[ranEvent
+			        .nextInt((int) (ScenarioEvent.values().length * eventFactor))];
+			runEvent(event, flight);
+		}
+	}
 
 	/**
 	 * @param flights list of flights, that should be included in this scenario
