@@ -57,9 +57,9 @@ public final class LongDateHelper {
 	
 	public static TimeStamp createTimeStamp(final TimeStamp stamp, int min, boolean positive) {
 		if(positive)
-			return createTimeStamp(stamp.getTime()+getTimeInMs(min, 0, 0));
+			return createTimeStamp(stamp.getTime()+getTimeInMs(0, 0, min));
 		
-		return createTimeStamp(stamp.getTime()-getTimeInMs(min, 0, 0));
+		return createTimeStamp(stamp.getTime()-getTimeInMs(0, 0, min));
 	}
 	
 	/**
@@ -73,13 +73,14 @@ public final class LongDateHelper {
 	
 	/**
 	 * @param time delta in milliseconds (see Java-Date)
-	 * @return string in format Days:Hours:Mins
+	 * @return string in format Days:Hours:Mins:Secs
 	 */
 	public static String deltaAsString(long delta) {
 		long days = delta / DAYINMS;
 		long hours = (delta - days * DAYINMS) / HOURINMS;
 		long mins = (delta - days * DAYINMS - hours * HOURINMS) / MINUTEINMS;
-		return days + ":"+ hours + ":" + mins;
+		long secs = (delta - days * DAYINMS - hours * HOURINMS - mins * MINUTEINMS) / SECONDSINMS;
+		return days + "d:"+ hours + "h:" + mins + "m:" + secs +"s";
 	}
 	
 	/**
