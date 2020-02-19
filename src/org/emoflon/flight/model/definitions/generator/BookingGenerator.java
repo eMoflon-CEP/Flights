@@ -13,7 +13,15 @@ public class BookingGenerator {
 	/**
 	 * output path
 	 */
-	static String filePath = "src\\org\\emoflon\\flight\\model\\definitions\\simple.bookings";
+	static String outFilePath = "src\\org\\emoflon\\flight\\model\\definitions\\simple.bookings";
+	/**
+	 * folder where the ".bookingcflightgen" or ".bookingncflightgen" files are found
+	 */
+	static String genFolderPath = "src\\org\\emoflon\\flight\\model\\definitions\\";
+	/**
+	 * folder where the ".bookingcflightgen" or ".bookingncflightgen" files are found
+	 */
+	static String personsFilePath = "src\\org\\emoflon\\flight\\model\\definitions\\simple.persons";
 	/**
 	 * output header
 	 */
@@ -54,7 +62,7 @@ public class BookingGenerator {
 	/**
 	 * person list
 	 */
-	private String[] personStrings = ModelParser.arrayParseFromFile(0, "simple.persons");
+	private String[] personStrings = ModelParser.arrayParseFromFile(0, personsFilePath);
 	/**
 	 * start date for the generator
 	 */
@@ -83,7 +91,7 @@ public class BookingGenerator {
 	public static void main(String[] args) {
 		long tic = System.currentTimeMillis();
 		try {
-			PrintWriter pw = new PrintWriter(filePath);
+			PrintWriter pw = new PrintWriter(outFilePath);
 			BookingGenerator bg = new BookingGenerator("simple.bookingcflightgen","simple.bookingncflightgen");
 
 			List<String> generatedBookings = bg.generateBookings(repeat);
@@ -100,12 +108,12 @@ public class BookingGenerator {
 		System.out.println("Finished in: " + (toc - tic) + " ms");
 	}
 	/**
-	 * @param fileNameConnectingFlights of the ".bookingcflightgen" file in '/Flights/src/org/emoflon/flight/model/definitions'
-	 * @param fileNameNonConnectingFlights of the ".bookingncflightgen" file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param fileNameConnectingFlights of the ".bookingcflightgen" file in genFolderPath
+	 * @param fileNameNonConnectingFlights of the ".bookingncflightgen" file in genFolderPath
 	 */
 	public BookingGenerator(String fileNameConnectingFlights, String fileNameNonConnectingFlights) {
-		connectingFlights = parseFlights(fileNameConnectingFlights);
-		nonConnectingFlights = parseFlights(fileNameNonConnectingFlights);
+		connectingFlights = parseFlights(genFolderPath +fileNameConnectingFlights);
+		nonConnectingFlights = parseFlights(genFolderPath + fileNameNonConnectingFlights);
 	}
 	/**
 	 * @param repeat times to repeat generation staring from startDate
@@ -155,7 +163,7 @@ public class BookingGenerator {
 		}
 	}	
 	/**
-	 * @param fileName of the ".bookingcflightgen" or ".bookingncflightgen" file in '/Flights/src/org/emoflon/flight/model/definitions'
+	 * @param fileName of the ".bookingcflightgen" or ".bookingncflightgen" file in genFolderPath
 	 * @return a List containing dummy flight arrays with possible route combinations
 	 */
 	private List<DummyFlight[]> parseFlights(String fileName) {

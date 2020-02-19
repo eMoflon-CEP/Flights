@@ -33,11 +33,11 @@ public class ModelParser {
 	}
 	/**
 	 * @param index of the selected element in each split line
-	 * @param fileName to parse in folder /Flights/src/org/emoflon/flight/model/definitions
+	 * @param filePath of the file to parse
 	 * @return string array filled with the selected element for each line
 	 */
-	public static String[] arrayParseFromFile(int index, String fileName) {
-		ArrayList<String[]> arrayList = parseFile(fileName);
+	public static String[] arrayParseFromFile(int index, String filePath) {
+		ArrayList<String[]> arrayList = parseFile(filePath);
 		String[] out = new String[arrayList.size()];
 		for(int i=0;i<arrayList.size();i++) {
 			out[i] = arrayList.get(i)[0];
