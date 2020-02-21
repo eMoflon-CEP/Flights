@@ -21,6 +21,7 @@ public class ScenarioRunner {
 	private FlightModel model;
 	private ScenarioGenerator eventGenerator;
 	private Random rnd;
+	private double flightEventProbability = 0.1;
 	
 	private Queue<Flight> flights;
 	private Queue<Flight> inFlight;
@@ -55,13 +56,38 @@ public class ScenarioRunner {
 		rnd = new Random();
 	}
 	
-	public void initModelEventGenerator(long eventSeed, long flightSeed, long chaosSeed, double chaosFactor) {
+	public void initModelEventGenerator(long eventSeed, long flightSeed, long chaosSeed, double chaosFactor, double flightEventProbability) {
 		eventGenerator = new ScenarioGenerator(eventSeed, flightSeed, chaosSeed, chaosFactor);
+		this.flightEventProbability = flightEventProbability;
 		rnd = new Random(flightSeed);
 	}
 	
 	public FlightModel getModel() {
 		return model;
+	}
+	
+	public void advanceTime(int numberOfFlights) {
+		if(flights.isEmpty())
+			return;
+		
+		LinkedList<Flight> candidates = new LinkedList<>();
+		for(int i = 0; i<numberOfFlights; i++) {
+			if(flights.isEmpty())
+				break;
+			
+			Flight flight = flights.poll();
+			inFlight.add(flight);
+			candidates.add(flight);
+		}
+		
+		for(Flight flight : candidates) {
+			eventGenerator.runScenario(flight, flightEventProbability);
+		}
+		model.setGlobalTime(LongDateHelper.createTimeStamp(candidates.getLast().getDeparture(), 0));
+		
+		while(!inFlight.isEmpty() && inFlight.peek().getArrival().getTime() <= model.getGlobalTime().getTime()) {
+			EcoreUtil.delete(inFlight.poll());
+		}
 	}
 
 	public void advanceTimeRnd() {
@@ -71,13 +97,16 @@ public class ScenarioRunner {
 		int nextFlights = 1+rnd.nextInt(flights.size()-1);
 		LinkedList<Flight> candidates = new LinkedList<>();
 		for(int i = 0; i<nextFlights; i++) {
+			if(flights.isEmpty())
+				break;
+			
 			Flight flight = flights.poll();
 			inFlight.add(flight);
 			candidates.add(flight);
 		}
 		
 		for(Flight flight : candidates) {
-			eventGenerator.runScenario(flight, 0.1);
+			eventGenerator.runScenario(flight, flightEventProbability);
 		}
 		model.setGlobalTime(LongDateHelper.createTimeStamp(candidates.getLast().getDeparture(), 0));
 		
@@ -91,7 +120,7 @@ public class ScenarioRunner {
 			return;
 		
 		Flight flight = flights.poll();
-		eventGenerator.runScenario(flight, 0.5);
+		eventGenerator.runScenario(flight, flightEventProbability);
 		inFlight.add(flight);
 		model.setGlobalTime(LongDateHelper.createTimeStamp(flight.getDeparture(), 0));
 		
