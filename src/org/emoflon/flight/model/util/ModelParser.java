@@ -26,7 +26,7 @@ public class ModelParser {
 			myReader.close();
 			return out;
 		} catch (FileNotFoundException e) {
-			System.out.println("An error occurred.");
+			System.err.println("File: "+fileName+" could not be found.");
 			e.printStackTrace();
 		}
 		return null;

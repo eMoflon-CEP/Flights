@@ -69,6 +69,18 @@ public class ScenarioGenerator {
 		ranFlight = new Random(flightSeed);
 		ranChaos = new Random(chaosSeed);
 	}
+	
+	/**
+	 * @param flights list of flights, that should be included in this scenario
+	 */
+	public void runScenario(final Flight flight, double eventProbability) {
+		if(ranEvent.nextDouble() <= eventProbability) {
+//			ScenarioEvent event = ScenarioEvent.values()[ranEvent
+//			        .nextInt((int) (ScenarioEvent.values().length * eventFactor))];
+//			runEvent(event, flight);
+			continuousDelayEvent(flight);
+		}
+	}
 
 	/**
 	 * @param flights list of flights, that should be included in this scenario
@@ -118,6 +130,16 @@ public class ScenarioGenerator {
 				filteredFlights.add(flight);
 		}
 		return filteredFlights;
+	}
+	
+	private void continuousDelayEvent(Flight flight) {
+		final double avgDelay = 100;
+		final double deviation = 200;
+		long delay = LongDateHelper.getTimeInMs((int)(ranChaos.nextGaussian()*deviation + avgDelay));
+		long arrival = flight.getArrival().getTime();
+		TimeStamp arrivalStamp = FlightsFactory.eINSTANCE.createTimeStamp();
+		arrivalStamp.setTime(arrival + delay);
+		flight.setArrival(arrivalStamp);
 	}
 
 	/**
