@@ -115,19 +115,35 @@ public class ScenarioRunner {
 		}
 	}
 	
-	public void advanceTime() {
-		if(flights.isEmpty())
-			return;
+	public boolean advanceTime() {
+		Flight flight = null;
+		if(!flights.isEmpty()) {
+			 flight = flights.poll();
+			 inFlight.add(flight);
+			 model.setGlobalTime(LongDateHelper.createTimeStamp(flight.getDeparture(), 0));
+		}
 		
-		Flight flight = flights.poll();
+		if(flight == null && !inFlight.isEmpty()) {
+			flight = inFlight.poll();
+			model.setGlobalTime(LongDateHelper.createTimeStamp(flight.getArrival(), 0));
+		}
+		
+		if(flight == null)
+			return false;
+		
 		eventGenerator.runScenario(flight, flightEventProbability);
-		inFlight.add(flight);
-		model.setGlobalTime(LongDateHelper.createTimeStamp(flight.getDeparture(), 0));
+		
+		if(!flights.isEmpty() && inFlight.isEmpty()) {
+			EcoreUtil.delete(flight);
+			return false;
+		}
 		
 		while(!inFlight.isEmpty() && inFlight.peek().getArrival().getTime() <= model.getGlobalTime().getTime()) {
 			EcoreUtil.delete(inFlight.poll());
 		}
 		
+		return true;
+
 	}
 	
 }
