@@ -9,6 +9,7 @@ import org.emoflon.flight.model.util.ModelParser;
 
 import Flights.Flight;
 import Flights.FlightsFactory;
+import Flights.Gate;
 import Flights.Plane;
 import Flights.Planes;
 import Flights.Route;
@@ -136,6 +137,8 @@ public class ContinuousFlightGenerator extends ModelGenerator{
 		public Flight convertToFlight(int repeat, int planeIndex, long startDate) {
 			Flight flight = factory.createFlight();
 			flight.setID(createUFlightID(startDate, repeat));
+			Gate source = getRandomGate(route.getSrc());
+			Gate target = getRandomGate(route.getTrg());
 			TimeStamp departureStamp = factory.createTimeStamp();
 			departureStamp.setTime(getRepeatedDepartureTime(repeat, startDate));
 			flight.setDeparture(departureStamp);
@@ -144,6 +147,8 @@ public class ContinuousFlightGenerator extends ModelGenerator{
 			flight.setArrival(arrivalStamp);
 			flight.setRoute(route);
 			flight.setPlane(planes[planeIndex]);
+			flight.setSrc(source);
+			flight.setTrg(target);
 			
 			return flight;
 		}

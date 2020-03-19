@@ -12,6 +12,7 @@ import Flights.Booking;
 import Flights.Flight;
 import Flights.FlightContainer;
 import Flights.Person;
+import Flights.Persons;
 import Flights.Travel;
 
 public class ContinuousBookingGenerator extends ModelGenerator{
@@ -22,7 +23,7 @@ public class ContinuousBookingGenerator extends ModelGenerator{
 	/**
 	 * declares when looping through the person list again
 	 */
-	private final int loop;
+	private int loop;
 	/**
 	 * maximum of Persons, that can travel in a group
 	 */
@@ -47,7 +48,7 @@ public class ContinuousBookingGenerator extends ModelGenerator{
 	/**
 	 * number of persons in the person list
 	 */
-	private final int personListSize;
+	private int personListSize;
 	/**
 	 * seed for group building
 	 */
@@ -75,11 +76,11 @@ public class ContinuousBookingGenerator extends ModelGenerator{
 	 * @param filePathNonConnectingFlights of the ".bookingncflightgen" file
 	 * @param persons list including the persons that should be mapped to the bookings
 	 */
-	public ContinuousBookingGenerator(String filePathConnectingFlights, String filePathNonConnectingFlights, List<Person> persons) {
+	public ContinuousBookingGenerator(String filePathConnectingFlights, String filePathNonConnectingFlights, Persons persons) {
 		connectingFlights = parseFlights(filePathConnectingFlights);
 		nonConnectingFlights = parseFlights(filePathNonConnectingFlights);
-		this.persons = persons;
-		this.personListSize = persons.size();
+		this.persons = persons.getPersons();
+		this.personListSize = this.persons.size();
 		this.loop = Math.min(bookingsPerDay * daysBetweenTravels, personListSize);
 	}
 	/**
@@ -131,6 +132,7 @@ public class ContinuousBookingGenerator extends ModelGenerator{
 			}
 			offset += personsOnFlight;
 		}
+
 		return bookings;
 	}
 	/**
