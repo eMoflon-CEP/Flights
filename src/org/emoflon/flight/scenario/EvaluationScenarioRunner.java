@@ -35,7 +35,7 @@ public class EvaluationScenarioRunner extends ScenarioRunner {
 	private FlightsFactory factory = FlightsFactory.eINSTANCE;
 	private long bookingsUntilDate = LongDateHelper.getDate(01, 01, 2020);
 	private long flightsUntilDate = bookingsUntilDate;
-	private int flightOffset = 6;
+	private int flightOffset = 4;
 	private int initalStepSize = 8;
 	
 	public EvaluationScenarioRunner() {
