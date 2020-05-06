@@ -2,6 +2,7 @@ package org.emoflon.flight.model.generator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.emoflon.flight.model.util.ModelParser;
 
@@ -27,6 +28,7 @@ public class ModelGenerator {
 	 * instance of FlightsFactory
 	 */
 	private FlightsFactory factory = FlightsFactory.eINSTANCE;
+	final static Random rnd = new Random("ConstantSeed42".hashCode());
 	/**
 	 * @param airports containing the desired airport
 	 * @param ID identifying the desired airport
@@ -53,7 +55,8 @@ public class ModelGenerator {
 	protected static Gate getRandomGate(Airport airport) {
 		if(airport==null) return null;
 		int size = airport.getGates().size();
-		int rand = (int) (Math.random() * size);
+//		int rand = (int) (Math.random() * size);
+		int rand = (int) (rnd.nextDouble() * size);
 		return airport.getGates().get(rand);
 	}
 	/**

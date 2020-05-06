@@ -66,54 +66,54 @@ public class ScenarioRunner {
 		return model;
 	}
 	
-	public void advanceTime(int numberOfFlights) {
-		if(flights.isEmpty())
-			return;
-		
-		LinkedList<Flight> candidates = new LinkedList<>();
-		for(int i = 0; i<numberOfFlights; i++) {
-			if(flights.isEmpty())
-				break;
-			
-			Flight flight = flights.poll();
-			inFlight.add(flight);
-			candidates.add(flight);
-		}
-		
-		for(Flight flight : candidates) {
-			eventGenerator.runScenario(flight, flightEventProbability);
-		}
-		model.setGlobalTime(LongDateHelper.createTimeStamp(candidates.getLast().getDeparture(), 0));
-		
-		while(!inFlight.isEmpty() && inFlight.peek().getArrival().getTime() <= model.getGlobalTime().getTime()) {
-			EcoreUtil.delete(inFlight.poll());
-		}
-	}
+//	public void advanceTime(int numberOfFlights) {
+//		if(flights.isEmpty())
+//			return;
+//		
+//		LinkedList<Flight> candidates = new LinkedList<>();
+//		for(int i = 0; i<numberOfFlights; i++) {
+//			if(flights.isEmpty())
+//				break;
+//			
+//			Flight flight = flights.poll();
+//			inFlight.add(flight);
+//			candidates.add(flight);
+//		}
+//		
+//		for(Flight flight : candidates) {
+//			eventGenerator.runScenario(flight, flightEventProbability);
+//		}
+//		model.setGlobalTime(LongDateHelper.createTimeStamp(candidates.getLast().getDeparture(), 0));
+//		
+//		while(!inFlight.isEmpty() && inFlight.peek().getArrival().getTime() <= model.getGlobalTime().getTime()) {
+//			EcoreUtil.delete(inFlight.poll());
+//		}
+//	}
 
-	public void advanceTimeRnd() {
-		if(flights.isEmpty())
-			return;
-		
-		int nextFlights = 1+rnd.nextInt(flights.size()-1);
-		LinkedList<Flight> candidates = new LinkedList<>();
-		for(int i = 0; i<nextFlights; i++) {
-			if(flights.isEmpty())
-				break;
-			
-			Flight flight = flights.poll();
-			inFlight.add(flight);
-			candidates.add(flight);
-		}
-		
-		for(Flight flight : candidates) {
-			eventGenerator.runScenario(flight, flightEventProbability);
-		}
-		model.setGlobalTime(LongDateHelper.createTimeStamp(candidates.getLast().getDeparture(), 0));
-		
-		while(!inFlight.isEmpty() && inFlight.peek().getArrival().getTime() <= model.getGlobalTime().getTime()) {
-			EcoreUtil.delete(inFlight.poll());
-		}
-	}
+//	public void advanceTimeRnd() {
+//		if(flights.isEmpty())
+//			return;
+//		
+//		int nextFlights = 1+rnd.nextInt(flights.size()-1);
+//		LinkedList<Flight> candidates = new LinkedList<>();
+//		for(int i = 0; i<nextFlights; i++) {
+//			if(flights.isEmpty())
+//				break;
+//			
+//			Flight flight = flights.poll();
+//			inFlight.add(flight);
+//			candidates.add(flight);
+//		}
+//		
+//		for(Flight flight : candidates) {
+//			eventGenerator.runScenario(flight, flightEventProbability);
+//		}
+//		model.setGlobalTime(LongDateHelper.createTimeStamp(candidates.getLast().getDeparture(), 0));
+//		
+//		while(!inFlight.isEmpty() && inFlight.peek().getArrival().getTime() <= model.getGlobalTime().getTime()) {
+//			EcoreUtil.delete(inFlight.poll());
+//		}
+//	}
 	
 	public boolean advanceTime() {
 		Flight flight = null;

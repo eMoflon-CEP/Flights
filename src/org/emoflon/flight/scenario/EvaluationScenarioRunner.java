@@ -26,7 +26,7 @@ public class EvaluationScenarioRunner extends ScenarioRunner {
 	private ScenarioGenerator eventGenerator;
 	private ContinuousBookingGenerator bookingGenerator;
 	private ContinuousFlightGenerator flightGenerator;
-	private Random rnd;
+//	private Random rnd;
 	private double flightEventProbability = 0.1;
 	
 	private Queue<Flight> flights;
@@ -41,8 +41,9 @@ public class EvaluationScenarioRunner extends ScenarioRunner {
 	public EvaluationScenarioRunner() {
 	}
 	
-	public EvaluationScenarioRunner(int initalStepSize) {
+	public EvaluationScenarioRunner(int initalStepSize, int flightOffset) {
 		this.initalStepSize = initalStepSize;
+		this.flightOffset = flightOffset;
 	}
 	
 	@Override
@@ -61,7 +62,7 @@ public class EvaluationScenarioRunner extends ScenarioRunner {
 		//Set initial global time to earliest flight
 		long minTime = model.getFlights().getFlights().stream()
 			.map(flight -> flight.getDeparture().getTime())
-			.reduce((long)0, (min, value) -> ((min<value)?min:value));
+			.reduce(bookingsUntilDate, (min, value) -> ((min<value)?min:value));
 		TimeStamp globalTime = factory.createTimeStamp();
 		globalTime.setTime(minTime);
 		model.setGlobalTime(globalTime);
@@ -75,17 +76,21 @@ public class EvaluationScenarioRunner extends ScenarioRunner {
 		for(Flight flight : model.getFlights().getFlights()) {
 			flights.add(flight);
 		}
+		
+		System.out.println("Initial number of flights: "+ flights.size());
+		System.out.println("Initial number of bookings: "+ model.getBookings().getBookings().size());
+		System.out.println("Initial number of travels: "+ model.getBookings().getBookings().stream().flatMap(booking -> booking.getTravels().stream()).distinct().count());
 	}
 	
 	public void initModelEventGenerator() {
 		eventGenerator = new ScenarioGenerator();
-		rnd = new Random();
+//		rnd = new Random();
 	}
 	
 	public void initModelEventGenerator(long eventSeed, long flightSeed, long chaosSeed, double chaosFactor, double flightEventProbability) {
 		eventGenerator = new ScenarioGenerator(eventSeed, flightSeed, chaosSeed, chaosFactor);
 		this.flightEventProbability = flightEventProbability;
-		rnd = new Random(flightSeed);
+//		rnd = new Random(flightSeed);
 	}
 	
 	public FlightModel getModel() {
@@ -112,54 +117,56 @@ public class EvaluationScenarioRunner extends ScenarioRunner {
 		bookingsUntilDate += LongDateHelper.DAYINMS * step;
 	}
 	
-	public void advanceTime(int numberOfFlights) {
-		if(flights.isEmpty())
-			return;
-		
-		LinkedList<Flight> candidates = new LinkedList<>();
-		for(int i = 0; i<numberOfFlights; i++) {
-			if(flights.isEmpty())
-				break;
-			
-			Flight flight = flights.poll();
-			inFlight.add(flight);
-			candidates.add(flight);
-		}
-		
-		for(Flight flight : candidates) {
-			eventGenerator.runScenario(flight, flightEventProbability);
-		}
-		model.setGlobalTime(LongDateHelper.createTimeStamp(candidates.getLast().getDeparture(), 0));
-		
-		while(!inFlight.isEmpty() && inFlight.peek().getArrival().getTime() <= model.getGlobalTime().getTime()) {
-			EcoreUtil.delete(inFlight.poll());
-		}
-	}
+//	public void advanceTime(int numberOfFlights) {
+//		if(flights.isEmpty())
+//			return;
+//		
+//		LinkedList<Flight> candidates = new LinkedList<>();
+//		for(int i = 0; i<numberOfFlights; i++) {
+//			if(flights.isEmpty())
+//				break;
+//			
+//			Flight flight = flights.poll();
+//			inFlight.add(flight);
+//			candidates.add(flight);
+//		}
+//		
+//		for(Flight flight : candidates) {
+//			eventGenerator.runScenario(flight, flightEventProbability);
+//		}
+//		model.setGlobalTime(LongDateHelper.createTimeStamp(candidates.getLast().getDeparture(), 0));
+//		
+//		while(!inFlight.isEmpty() && inFlight.peek().getArrival().getTime() <= model.getGlobalTime().getTime()) {
+//			EcoreUtil.delete(inFlight.poll());
+//		}
+//	}
 
-	public void advanceTimeRnd() {
-		if(flights.isEmpty())
-			return;
-		
-		int nextFlights = 1+rnd.nextInt(flights.size()-1);
-		LinkedList<Flight> candidates = new LinkedList<>();
-		for(int i = 0; i<nextFlights; i++) {
-			if(flights.isEmpty())
-				break;
-			
-			Flight flight = flights.poll();
-			inFlight.add(flight);
-			candidates.add(flight);
-		}
-		
-		for(Flight flight : candidates) {
-			eventGenerator.runScenario(flight, flightEventProbability);
-		}
-		model.setGlobalTime(LongDateHelper.createTimeStamp(candidates.getLast().getDeparture(), 0));
-		
-		while(!inFlight.isEmpty() && inFlight.peek().getArrival().getTime() <= model.getGlobalTime().getTime()) {
-			EcoreUtil.delete(inFlight.poll());
-		}
-	}
+//	public void advanceTimeRnd() {
+//		if(flights.isEmpty())
+//			return;
+//		
+//		int nextFlights = 1+rnd.nextInt(flights.size()-1);
+//		LinkedList<Flight> candidates = new LinkedList<>();
+//		for(int i = 0; i<nextFlights; i++) {
+//			if(flights.isEmpty())
+//				break;
+//			
+//			Flight flight = flights.poll();
+//			inFlight.add(flight);
+//			candidates.add(flight);
+//		}
+//		
+//		for(Flight flight : candidates) {
+//			eventGenerator.runScenario(flight, flightEventProbability);
+//		}
+//		model.setGlobalTime(LongDateHelper.createTimeStamp(candidates.getLast().getDeparture(), 0));
+//		
+//		while(!inFlight.isEmpty() && inFlight.peek().getArrival().getTime() <= model.getGlobalTime().getTime()) {
+//			EcoreUtil.delete(inFlight.poll());
+//		}
+//	}
+	
+	private int changes = 0;
 	
 	public boolean advanceTime() {
 		Flight flight = null;
@@ -177,7 +184,9 @@ public class EvaluationScenarioRunner extends ScenarioRunner {
 		if(flight == null)
 			return false;
 		
-		eventGenerator.runScenario(flight, flightEventProbability);
+		if(eventGenerator.runScenario(flight, flightEventProbability)) {
+			changes++;
+		}
 		
 		if(!flights.isEmpty() && inFlight.isEmpty()) {
 			EcoreUtil.delete(flight);
@@ -190,6 +199,33 @@ public class EvaluationScenarioRunner extends ScenarioRunner {
 		
 		return true;
 
+	}
+	
+	public boolean runForDays(double days) {
+		long timePeriod = (long)(((double)LongDateHelper.DAYINMS)*days);
+		System.out.println("Running simulation for "+LongDateHelper.deltaAsString(timePeriod));
+		
+		long dT = 0;
+		long initialTime = model.getGlobalTime().getTime();
+		System.out.println("Starting at "+LongDateHelper.getStringDDMMYYYY(initialTime));
+		boolean flightsLeft = true;
+		while(dT < timePeriod && flightsLeft) {
+			flightsLeft = advanceTime();
+			dT = model.getGlobalTime().getTime() - initialTime;
+		}
+		System.out.println("Ending at "+LongDateHelper.getStringDDMMYYYY(model.getGlobalTime().getTime()));
+		System.out.println("Simulation actually ran for "+LongDateHelper.deltaAsString(model.getGlobalTime().getTime()-initialTime));
+		
+		long leftOver = bookingsUntilDate - model.getGlobalTime().getTime();
+		System.out.println("Time until bookigns run out(1): "+LongDateHelper.deltaAsString(leftOver));
+		if(leftOver-initalStepSize*LongDateHelper.DAYINMS <= LongDateHelper.DAYINMS*(flightOffset-1))
+			addFlightsAndBookings(flightOffset);
+		
+		leftOver = bookingsUntilDate - model.getGlobalTime().getTime();
+		System.out.println("Time until bookigns run out(2): "+LongDateHelper.deltaAsString(leftOver));
+		
+		System.out.println("Current number of applied changes: "+changes);
+		return flightsLeft;
 	}
 	
 }

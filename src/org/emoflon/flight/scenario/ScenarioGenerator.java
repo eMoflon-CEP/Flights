@@ -73,13 +73,15 @@ public class ScenarioGenerator {
 	/**
 	 * @param flights list of flights, that should be included in this scenario
 	 */
-	public void runScenario(final Flight flight, double eventProbability) {
+	public boolean runScenario(final Flight flight, double eventProbability) {
 		if(ranEvent.nextDouble() <= eventProbability) {
 //			ScenarioEvent event = ScenarioEvent.values()[ranEvent
 //			        .nextInt((int) (ScenarioEvent.values().length * eventFactor))];
 //			runEvent(event, flight);
 			continuousDelayEvent(flight);
+			return true;
 		}
+		return false;
 	}
 
 	/**
