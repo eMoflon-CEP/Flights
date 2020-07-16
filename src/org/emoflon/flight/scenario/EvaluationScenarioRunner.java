@@ -80,6 +80,7 @@ public class EvaluationScenarioRunner extends ScenarioRunner {
 		System.out.println("Initial number of flights: "+ flights.size());
 		System.out.println("Initial number of bookings: "+ model.getBookings().getBookings().size());
 		System.out.println("Initial number of travels: "+ model.getBookings().getBookings().stream().flatMap(booking -> booking.getTravels().stream()).distinct().count());
+		System.out.println("Initial number of Persons: "+ model.getPersons().getPersons().size());
 	}
 	
 	public void initModelEventGenerator() {
