@@ -13,8 +13,10 @@ Export-Package: Flights,
  Flights.util,
  org.emoflon.flight.model.definitions.generator,
  org.emoflon.flight.model.generator,
+ org.emoflon.flight.model.generator.continuousStream,
  org.emoflon.flight.model.util,
  org.emoflon.flight.scenario
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.eclipse.emf.ecore.xmi
 Bundle-ActivationPolicy: lazy
